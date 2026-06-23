@@ -1,0 +1,476 @@
+:root {
+  color-scheme: dark;
+  --cook-bg: #ff8740;
+  --cook-bg-2: #f46f2d;
+  --cook-card: #6b2b1f;
+  --cook-card-2: #7b3522;
+  --cook-border: rgba(255, 232, 190, 0.34);
+  --cook-border-strong: rgba(255, 239, 205, 0.58);
+  --cook-orange: #ff8b3d;
+  --cook-orange-2: #ffc06f;
+  --cook-cream: #fff8e8;
+  --cook-cream-2: #ffe0ad;
+  --cook-brown: #6a2b1e;
+  --cook-deep: #3b140f;
+  --cook-green: #74c043;
+  --cook-purple: #7c4dff;
+  --cook-danger: #ff6357;
+}
+html, body, #root { min-height: 100%; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 18% 4%, rgba(255, 233, 160, 0.42), transparent 310px),
+    radial-gradient(circle at 86% 8%, rgba(255, 194, 91, 0.34), transparent 300px),
+    linear-gradient(180deg, #ff8a3d 0%, #ff7a35 38%, #ec642a 100%);
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--cook-cream);
+}
+* { box-sizing: border-box; }
+a { color: var(--cook-orange-2); text-decoration-color: rgba(255,154,87,.45); }
+.mobile-shell { min-height: 100dvh; background: transparent; }
+.mobile-topbar {
+  background: rgba(99, 37, 24, 0.96) !important;
+  border-bottom: 1px solid rgba(255, 202, 143, 0.14);
+  backdrop-filter: blur(14px);
+}
+.mobile-toolbar { min-height: 48px !important; padding-left: 12px !important; padding-right: 12px !important; }
+.live-dot {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border-radius: 999px;
+  border: 1px solid rgba(116,192,67,.36); background: rgba(45,80,21,.35); color:#c9ff9c;
+  font-size: 11px; font-weight: 850;
+}
+.live-dot::before { content:''; width:6px; height:6px; border-radius:999px; background:var(--cook-green); }
+.mobile-container { padding: 10px 8px 88px !important; max-width: 520px !important; }
+.screen-card { min-width: 0; }
+.bottom-nav-wrap {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1200;
+  padding: 7px 8px max(7px, env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(255,138,61,.10), rgba(98,35,22,.98)) !important;
+  border-top: 1px solid rgba(255,202,143,.14); backdrop-filter: blur(14px);
+}
+.bottom-nav {
+  height: 60px !important; max-width: 500px; margin: 0 auto;
+  border: 1px solid rgba(255,202,143,.22); border-radius: 18px; overflow: hidden;
+  background: #5b241c !important;
+}
+.bottom-nav .MuiBottomNavigationAction-root { min-width: 0; padding: 5px 2px 7px; color: rgba(255,244,223,.55); }
+.bottom-nav .MuiBottomNavigationAction-root.Mui-selected { color: var(--cook-cream); background: rgba(251,127,63,.10); }
+.bottom-nav .MuiBottomNavigationAction-label { font-size: 10.5px; font-weight: 900; }
+.bottom-nav .MuiSvgIcon-root { font-size: 21px; }
+.MuiCardContent-root { padding: 14px !important; }
+.MuiCardContent-root:last-child { padding-bottom: 14px !important; }
+.MuiCard-root, .MuiPaper-root:not(.bottom-nav-wrap) { background-image: none !important; }
+.app-section, .account-mini-card {
+  border-radius: 18px !important;
+  overflow: visible !important;
+  border: 1px solid var(--cook-border) !important;
+  background: linear-gradient(180deg, #743222, #552017) !important;
+  box-shadow: 0 16px 42px rgba(0,0,0,.24) !important;
+}
+.account-mini-card {
+  padding: 12px;
+  background: linear-gradient(135deg, #793522, #5b241a 52%, #6b2b1f) !important;
+}
+.section-title { font-size: 1.22rem !important; line-height: 1.15 !important; letter-spacing: -0.03em; color: var(--cook-cream) !important; }
+.section-subtitle { line-height: 1.35 !important; color: rgba(255,244,223,.72) !important; }
+.account-one-line { display:block; white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:100%; }
+.MuiDialog-paper {
+  margin: 10px !important; border-radius: 18px !important;
+  background: linear-gradient(180deg, #7b3522, #5a2118) !important;
+  border: 1px solid var(--cook-border-strong);
+  color: var(--cook-cream) !important;
+}
+.MuiDialogTitle-root { padding: 14px 14px 6px !important; font-weight: 900 !important; color: var(--cook-cream) !important; }
+.MuiDialogContent-root { padding: 8px 14px 12px !important; }
+.MuiDialogActions-root { padding: 10px 14px 14px !important; }
+.MuiAlert-root { padding: 9px 10px !important; font-size: .86rem; border-radius: 14px !important; border: 1px solid rgba(255,202,143,.18); }
+.MuiAlert-standardSuccess { background: #23551d !important; color: #dfffca !important; }
+.MuiAlert-standardInfo { background: #7a331f !important; color: var(--cook-cream) !important; }
+.MuiAlert-standardWarning { background: #75451c !important; color: #ffe1ad !important; }
+.MuiAlert-standardError { background: #6d251f !important; color: #ffd1cc !important; }
+.compact-alert .MuiAlert-message { line-height: 1.32; }
+.MuiButton-root { min-height: 42px !important; border-radius: 13px !important; font-weight: 900 !important; }
+.MuiButton-contained, .MuiButton-containedPrimary {
+  background: linear-gradient(135deg, var(--cook-orange), #db6717) !important;
+  color: #1c0314 !important;
+  box-shadow: 0 8px 22px rgba(251,127,63,.18) !important;
+}
+.MuiButton-outlined, .MuiButton-outlinedPrimary {
+  border-color: rgba(255,154,87,.46) !important;
+  color: var(--cook-orange-2) !important;
+  background: rgba(251,127,63,.06) !important;
+}
+.MuiButton-text { color: var(--cook-orange-2) !important; }
+.MuiTextField-root input, .MuiTextField-root textarea { font-size: 16px !important; color: var(--cook-cream) !important; }
+.MuiOutlinedInput-root { border-radius: 13px !important; background: #4a1a14 !important; }
+.MuiOutlinedInput-notchedOutline { border-color: rgba(255,202,143,.22) !important; }
+.MuiInputLabel-root { color: rgba(255,244,223,.62) !important; }
+.MuiChip-root { max-width:100%; }
+.MuiChip-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.chip-wrap { display:flex !important; flex-wrap:wrap !important; gap:6px !important; margin-top:6px !important; margin-bottom:6px !important; }
+.chip-wrap .MuiChip-root { height: 28px !important; background: rgba(255,202,143,.09) !important; border: 1px solid rgba(255,202,143,.16) !important; color: var(--cook-cream) !important; }
+.status-card-wrap, .account-status-wrap { gap:6px !important; }
+.check-row, .mini-stat, .deposit-row-card, .claim-box {
+  border: 1px solid rgba(255,202,143,.16);
+  background: #582219;
+  border-radius: 14px;
+  color: var(--cook-cream);
+}
+.check-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding: 10px 11px; }
+.check-row.ok { border-color: rgba(116,192,67,.35); background: rgba(44,80,21,.18); }
+.check-row.need { border-color: rgba(223,146,38,.32); background: rgba(223,146,38,.10); }
+.claim-box { padding: 11px; }
+.status-summary-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:8px; }
+.status-summary-grid.compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mini-stat { padding: 10px; min-width:0; }
+.mini-stat.ok { border-color: rgba(116,192,67,.35); background: rgba(44,80,21,.18); }
+.mini-stat.warn { border-color: rgba(223,146,38,.32); background: rgba(223,146,38,.10); }
+.mini-stat .MuiTypography-root { overflow:hidden; text-overflow:ellipsis; }
+.deposit-row-card { padding: 11px; }
+.break-text { display:block; word-break: break-all; color: rgba(255,244,223,.66); }
+.MuiTableContainer-root { border-radius: 12px !important; border: 1px solid rgba(255,202,143,.14); overflow-x:auto; background: #542018 !important; }
+.MuiTableCell-root { border-bottom-color: rgba(255,202,143,.11) !important; padding: 8px !important; white-space: nowrap; color: var(--cook-cream) !important; }
+.MuiDivider-root { border-color: rgba(255,202,143,.14) !important; }
+.MuiTypography-root { color: inherit; }
+.MuiTypography-colorTextSecondary { color: rgba(255,244,223,.68) !important; }
+@media (max-width: 600px) {
+  .MuiStack-root > .MuiButton-root, .MuiStack-root > a.MuiButton-root { width: 100%; }
+  .MuiTypography-h6 { font-size: 1.08rem !important; }
+  .MuiTypography-body1 { font-size: .94rem !important; }
+  .MuiTypography-body2 { font-size: .84rem !important; }
+  .status-summary-grid { grid-template-columns: 1fr; }
+  .status-summary-grid.compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mini-stat { padding: 9px; }
+}
+@media (max-width: 380px) {
+  .mobile-container { padding-left: 6px !important; padding-right: 6px !important; }
+  .status-summary-grid.compact { grid-template-columns: 1fr; }
+}
+
+/* Warmer, less transparent cooking theme refinements */
+.MuiBackdrop-root { background-color: rgba(44, 14, 8, 0.78) !important; backdrop-filter: blur(4px); }
+.MuiDialog-paper, .MuiPopover-paper, .MuiMenu-paper { opacity: 1 !important; }
+.MuiPaper-root:not(.bottom-nav-wrap), .app-section, .account-mini-card { color: var(--cook-cream) !important; }
+.MuiDialog-paper .MuiTypography-root, .MuiDialog-paper .MuiFormLabel-root, .MuiDialog-paper .MuiInputBase-input { color: var(--cook-cream) !important; }
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline { border-color: rgba(255, 230, 188, 0.58) !important; }
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline { border-color: var(--cook-orange-2) !important; }
+
+
+/* =========================================================
+   FINAL COOKING THEME READABILITY OVERRIDE
+   Keeps the current app/features intact. Only color/contrast.
+   Goal: warm chef-orange background + solid readable brown/cream UI.
+   ========================================================= */
+:root {
+  --cook-bg: #fb9b55;
+  --cook-bg-2: #f47d35;
+  --cook-card: #6f2f20;
+  --cook-card-2: #823b24;
+  --cook-border: rgba(255, 231, 197, 0.28);
+  --cook-border-strong: rgba(255, 235, 203, 0.46);
+  --cook-orange: #ff9a3d;
+  --cook-orange-2: #ffd08a;
+  --cook-cream: #fff6e6;
+  --cook-cream-2: #f4d7b2;
+  --cook-brown: #582116;
+  --cook-deep: #34110d;
+  --cook-green: #62d46f;
+  --cook-purple: #ff9a3d;
+  --cook-danger: #ff7568;
+}
+
+html, body, #root {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 230, 170, 0.66), transparent 320px),
+    radial-gradient(circle at 92% 8%, rgba(255, 182, 98, 0.42), transparent 330px),
+    linear-gradient(180deg, #ffb56f 0%, #fb9148 46%, #f07832 100%) !important;
+}
+
+body {
+  color: var(--cook-cream) !important;
+}
+
+/* Main layout surfaces: not purple, not washed-out orange */
+.mobile-topbar,
+.account-mini-card,
+.app-section,
+.MuiCard-root,
+.MuiPaper-root:not(.bottom-nav-wrap):not(.MuiDialog-paper):not(.MuiMenu-paper):not(.MuiPopover-paper) {
+  background: linear-gradient(180deg, #763321 0%, #5a2118 100%) !important;
+  color: var(--cook-cream) !important;
+  border-color: var(--cook-border) !important;
+  box-shadow: 0 18px 42px rgba(81, 31, 16, 0.26) !important;
+}
+
+/* Inner rows/cards need contrast against main cards */
+.check-row,
+.mini-stat,
+.deposit-row-card,
+.claim-box,
+.MuiTableContainer-root,
+.status-card-wrap > *,
+.account-status-wrap > * {
+  background: rgba(61, 20, 14, 0.72) !important;
+  color: var(--cook-cream) !important;
+  border-color: rgba(255, 231, 197, 0.18) !important;
+}
+
+.check-row.ok,
+.mini-stat.ok,
+.MuiAlert-standardSuccess {
+  background: rgba(31, 89, 38, 0.92) !important;
+  border-color: rgba(119, 221, 126, 0.42) !important;
+  color: #edffe9 !important;
+}
+
+.check-row.need,
+.mini-stat.warn,
+.MuiAlert-standardWarning {
+  background: rgba(123, 78, 23, 0.94) !important;
+  border-color: rgba(255, 207, 117, 0.38) !important;
+  color: #fff0c4 !important;
+}
+
+.MuiAlert-standardError {
+  background: rgba(121, 37, 31, 0.95) !important;
+  color: #ffe2dd !important;
+  border-color: rgba(255, 129, 113, 0.42) !important;
+}
+
+.MuiAlert-standardInfo {
+  background: rgba(84, 31, 20, 0.96) !important;
+  color: var(--cook-cream) !important;
+  border-color: rgba(255, 231, 197, 0.20) !important;
+}
+
+/* Typography: readable on all brown panels */
+.MuiTypography-root,
+.section-title,
+.section-subtitle,
+.account-one-line,
+.break-text,
+.MuiTableCell-root {
+  color: var(--cook-cream) !important;
+}
+
+.section-subtitle,
+.MuiTypography-colorTextSecondary,
+.break-text,
+.account-one-line,
+.MuiFormHelperText-root {
+  color: var(--cook-cream-2) !important;
+}
+
+/* Inputs: solid, readable, no transparent orange-on-white issues */
+.MuiOutlinedInput-root,
+.MuiInputBase-root,
+input,
+textarea {
+  background: rgba(48, 15, 11, 0.92) !important;
+  color: var(--cook-cream) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 231, 197, 0.25) !important;
+}
+
+.MuiInputLabel-root {
+  color: rgba(255, 235, 203, 0.78) !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--cook-orange-2) !important;
+}
+
+.MuiInputBase-input::placeholder {
+  color: rgba(255, 246, 230, 0.56) !important;
+  opacity: 1 !important;
+}
+
+/* Buttons: orange chef style, but text is dark and readable */
+.MuiButton-contained,
+.MuiButton-containedPrimary,
+.brand-badge,
+.btn.primary {
+  background: linear-gradient(135deg, #ffb150 0%, #ff812f 100%) !important;
+  color: #281007 !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 22px rgba(136, 55, 17, 0.24) !important;
+}
+
+.MuiButton-contained *,
+.MuiButton-containedPrimary *,
+.brand-badge *,
+.btn.primary * {
+  color: #281007 !important;
+}
+
+.MuiButton-outlined,
+.MuiButton-outlinedPrimary,
+.MuiButton-text {
+  color: #ffe0ad !important;
+  border-color: rgba(255, 208, 138, 0.50) !important;
+  background: rgba(70, 24, 15, 0.42) !important;
+}
+
+/* Chips/status labels: warm brown/green, no purple */
+.MuiChip-root,
+.token-chip,
+.status-pill {
+  background: rgba(65, 23, 15, 0.70) !important;
+  border: 1px solid rgba(255, 231, 197, 0.18) !important;
+  color: var(--cook-cream) !important;
+}
+
+.MuiChip-colorSuccess,
+.status-pill.ok {
+  background: rgba(28, 100, 43, 0.92) !important;
+  color: #edffe9 !important;
+  border-color: rgba(119, 221, 126, 0.40) !important;
+}
+
+/* Tables/totals: stop white text disappearing against orange cards */
+.MuiTableCell-head {
+  color: #ffe5c5 !important;
+  background: rgba(42, 13, 9, 0.32) !important;
+}
+
+.MuiTableCell-body {
+  color: var(--cook-cream) !important;
+}
+
+/* Dialogs/modals: solid and readable */
+.MuiBackdrop-root {
+  background-color: rgba(45, 13, 7, 0.70) !important;
+  backdrop-filter: blur(6px);
+}
+
+.MuiDialog-paper,
+.MuiPopover-paper,
+.MuiMenu-paper {
+  background: linear-gradient(180deg, #763321 0%, #512018 100%) !important;
+  color: var(--cook-cream) !important;
+  border: 1px solid var(--cook-border-strong) !important;
+  opacity: 1 !important;
+  box-shadow: 0 24px 58px rgba(50, 15, 8, 0.48) !important;
+}
+
+.MuiDialog-paper .MuiTypography-root,
+.MuiDialog-paper .MuiFormLabel-root,
+.MuiDialog-paper .MuiInputBase-input,
+.MuiDialog-paper .MuiFormHelperText-root {
+  color: var(--cook-cream) !important;
+}
+
+/* Bottom nav: warm dark, active orange, not purple */
+.bottom-nav-wrap {
+  background: linear-gradient(180deg, rgba(255, 154, 61, 0.06), rgba(75, 27, 17, 0.98)) !important;
+}
+
+.bottom-nav {
+  background: #4c1b13 !important;
+  border-color: rgba(255, 231, 197, 0.22) !important;
+}
+
+.bottom-nav .MuiBottomNavigationAction-root {
+  color: rgba(255, 235, 203, 0.62) !important;
+}
+
+.bottom-nav .MuiBottomNavigationAction-root.Mui-selected {
+  color: #ffd08a !important;
+  background: rgba(255, 154, 61, 0.14) !important;
+}
+
+/* Links and focus states */
+a,
+.inline-link {
+  color: #ffe0ad !important;
+  text-decoration-color: rgba(255, 208, 138, 0.55) !important;
+}
+
+/* Avoid bright orange panels with white text */
+.claim-box,
+.input-card {
+  background: rgba(60, 20, 14, 0.84) !important;
+}
+
+
+
+/* Tab chef artwork at base of each section */
+.screen-card {
+  position: relative;
+}
+
+.tab-chef-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 150px;
+  margin: 12px auto 2px;
+  padding: 0 8px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tab-chef-image {
+  display: block;
+  width: min(62vw, 230px);
+  max-height: 230px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(54, 18, 8, 0.18));
+}
+
+.tab-chef-bsc .tab-chef-image,
+.tab-chef-solana .tab-chef-image {
+  width: min(66vw, 245px);
+}
+
+.tab-chef-status .tab-chef-image,
+.tab-chef-totals .tab-chef-image {
+  width: min(56vw, 210px);
+}
+
+@media (max-width: 380px) {
+  .tab-chef-wrap {
+    min-height: 125px;
+    margin-top: 8px;
+  }
+
+  .tab-chef-image {
+    width: min(64vw, 195px);
+    max-height: 195px;
+  }
+}
+
+@media (min-width: 720px) {
+  .tab-chef-wrap {
+    min-height: 170px;
+  }
+
+  .tab-chef-image {
+    width: 240px;
+    max-height: 240px;
+  }
+}
+
+
+/* Accounts footer tab update */
+.bottom-nav {
+  max-width: 540px !important;
+}
+.bottom-nav .MuiBottomNavigationAction-root {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  padding-left: 1px !important;
+  padding-right: 1px !important;
+}
+.bottom-nav .MuiBottomNavigationAction-label {
+  font-size: 9.5px !important;
+  line-height: 1.05 !important;
+}
+.bottom-nav .MuiSvgIcon-root {
+  font-size: 20px !important;
+}
