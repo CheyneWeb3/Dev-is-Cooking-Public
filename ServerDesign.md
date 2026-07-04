@@ -11,7 +11,7 @@ This design allows new servers to be joined, configured, monitored, and scaled w
 ---
 
 <p align="center">
-  <img src="./layout.png" alt="Cooking DockerStacked V70 Server Architecture" width="900">
+  <img src="./layoutwt.png" alt="Cooking DockerStacked V70 Server Architecture" width="900">
 </p>
 
 ## Design Goals
