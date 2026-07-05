@@ -10,7 +10,7 @@ export const solanaAdapter = new SolanaAdapter()
 
 const metadata = {
   name: APP_NAME,
-  description: 'Token migration claim and deposit app',
+  description: 'Token migration deposit app',
   url: APP_URL,
   icons: [`${APP_URL}/icon.png`]
 }
