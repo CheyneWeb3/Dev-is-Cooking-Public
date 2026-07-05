@@ -2,7 +2,7 @@
   "name": "Bernie Madoff - Legendary Swindler",
   "symbol": "BMADOFF",
   "description": "A satirical ultra-rare collectible trading card featuring Bernie Madoff as a cartoon finance trickster. Parody artwork created as a collectible NFT card.",
-  "image": "1.png",
+  "image": "https://raw.githubusercontent.com/CheyneWeb3/Dev-is-Cooking-Public/refs/heads/main/memes/1.png",
   "attributes": [
     {
       "trait_type": "Card Type",
