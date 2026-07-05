@@ -1,0 +1,69 @@
+{
+  "name": "Bernie Madoff - Legendary Swindler",
+  "symbol": "BMADOFF",
+  "description": "A satirical ultra-rare collectible trading card featuring Bernie Madoff as a cartoon finance trickster. Parody artwork created as a collectible NFT card.",
+  "image": "1.png",
+  "attributes": [
+    {
+      "trait_type": "Card Type",
+      "value": "Dark Finance"
+    },
+    {
+      "trait_type": "Class",
+      "value": "Legendary Swindler"
+    },
+    {
+      "trait_type": "HP",
+      "value": 120
+    },
+    {
+      "trait_type": "Ability",
+      "value": "Ponzi Pitch"
+    },
+    {
+      "trait_type": "Attack 1",
+      "value": "Investor Drain"
+    },
+    {
+      "trait_type": "Attack 1 Damage",
+      "value": 30
+    },
+    {
+      "trait_type": "Attack 2",
+      "value": "Federal Raid"
+    },
+    {
+      "trait_type": "Attack 2 Damage",
+      "value": 90
+    },
+    {
+      "trait_type": "Weakness",
+      "value": "Audit"
+    },
+    {
+      "trait_type": "Resistance",
+      "value": "Charm"
+    },
+    {
+      "trait_type": "Retreat Cost",
+      "value": "Handcuffs"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Ultra Rare"
+    },
+    {
+      "trait_type": "Card Number",
+      "value": "077/100"
+    }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [
+      {
+        "uri": "1.png",
+        "type": "image/png"
+      }
+    ]
+  }
+}
