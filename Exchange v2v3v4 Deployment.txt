@@ -1,0 +1,2351 @@
+cheyne@Crypto:~/bsc-uniswap-v2-v3-stack$ ./run-full-fresh-test.sh
+PASS: precompiled Permit2 and Universal Router artifacts load
+PASS: v0.6.3 full V2/V3/V4 lifecycle validation without explorer source verification
+=== LOW-BALANCE BSC TESTNET PROFILE ===
+Minimum starting balance: 0.20 tBNB
+Temporary V2 WBNB liquidity: 0.01 tBNB
+Temporary V3 WBNB liquidity: 0.01 tBNB
+Total temporary V2/V3 tBNB liquidity: 0.02 tBNB
+Full Uniswap V4 system: ENABLED
+Additional temporary V4 WBNB liquidity: 0.002 tBNB
+V4 mode: PositionManager NFTs, dynamic-fee hook and V4-capable Universal Router
+=== RESET FRESH LOCAL STATE AND POSTGRESQL ===
+[+] down 1/1
+ ✔ Network bsc-uniswap-v2-v3_default Removed                                                                                                     0.3s
+PASS: fresh local deployment state prepared
+
+=== BUILD FINAL CORRECTED STACK ===
+[+] Building 6.1s (23/23) FINISHED
+ => [internal] load local bake definitions                                                                                                      0.0s
+ => => reading from stdin 555B                                                                                                                  0.0s
+ => [internal] load build definition from Dockerfile                                                                                            0.0s
+ => => transferring dockerfile: 3.69kB                                                                                                          0.0s
+ => [internal] load metadata for docker.io/library/node:20-bookworm-slim                                                                        1.6s
+ => [internal] load .dockerignore                                                                                                               0.0s
+ => => transferring context: 174B                                                                                                               0.0s
+ => [ 1/16] FROM docker.io/library/node:20-bookworm-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0                0.0s
+ => => resolve docker.io/library/node:20-bookworm-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0                  0.0s
+ => [internal] load build context                                                                                                               0.0s
+ => => transferring context: 5.87kB                                                                                                             0.0s
+ => CACHED [ 2/16] RUN apt-get update     && apt-get install -y --no-install-recommends ca-certificates curl git tini     && rm -rf /var/lib/a  0.0s
+ => CACHED [ 3/16] RUN corepack enable     && corepack prepare yarn@1.22.22 --activate     && git clone --branch "v1.0.3" --depth 1 https://gi  0.0s
+ => CACHED [ 4/16] WORKDIR /app                                                                                                                 0.0s
+ => CACHED [ 5/16] COPY package.json package-lock.json ./                                                                                       0.0s
+ => CACHED [ 6/16] RUN npm ci --no-audit --no-fund     && npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund      0.0s
+ => CACHED [ 7/16] COPY precompiled ./precompiled                                                                                               0.0s
+ => CACHED [ 8/16] RUN node -e "for (const f of ['precompiled/Permit2.json','precompiled/UniversalRouter.json']) { const a=require('./'+f); if  0.0s
+ => [ 9/16] COPY config ./config                                                                                                                0.1s
+ => [10/16] COPY contracts ./contracts                                                                                                          0.0s
+ => [11/16] COPY scripts ./scripts                                                                                                              0.0s
+ => [12/16] RUN node scripts/compile-local-contracts.cjs                                                                                        1.9s
+ => [13/16] COPY src ./src                                                                                                                      0.0s
+ => [14/16] RUN node --input-type=module -e "Promise.all([import('./src/lib/v4-artifacts.js'),import('./src/lib/local-artifacts.js'),import('.  0.7s
+ => [15/16] COPY README.md VALIDATION.md LICENSES.md ./                                                                                         0.1s
+ => [16/16] RUN mkdir -p /data/deployments/97                                                                                                   0.4s
+ => exporting to image                                                                                                                          0.6s
+ => => exporting layers                                                                                                                         0.3s
+ => => exporting manifest sha256:4ab01eb0fa96afb694052bfd0107f810aca90992673c3430555866ff8003146b                                               0.0s
+ => => exporting config sha256:36ece0edbcdc77ed58617623052051fa4cade6b7eaae22d3d0759bbfa8d292db                                                 0.0s
+ => => exporting attestation manifest sha256:3e2afa677c2bb38408a3eff3924484d6554dfc9a3eee1ba83e3cf8394c2c65b8                                   0.0s
+ => => exporting manifest list sha256:983c92df51cdc7fbb278af23f1312ecd554d0e7daf4c5cb7d833d5cc45ab8772                                          0.0s
+ => => naming to docker.io/local/bsc-uniswap-v2-v3-stack:0.6.3                                                                                  0.0s
+ => => unpacking to docker.io/local/bsc-uniswap-v2-v3-stack:0.6.3                                                                               0.2s
+ => resolving provenance for metadata file                                                                                                      0.0s
+[+] build 1/1
+ ✔ Image local/bsc-uniswap-v2-v3-stack:0.6.3 Built                                                                                               6.3s
+
+=== SYNCHRONIZE OWNER CONFIG ===
+PASS: owner configuration synchronized to 0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342
+
+=== EARLY COMBINED V2/V3/V4 FUNDING AND EIP-1153 PREFLIGHT ===
+Container bsc-uniswap-v2-v3-dexctl-run-38aad7e80bdb Creating
+Container bsc-uniswap-v2-v3-dexctl-run-38aad7e80bdb Created
+{
+  "ok": true,
+  "enabled": true,
+  "checkedAt": "2026-07-22T13:14:05.375Z",
+  "chainId": 97,
+  "signer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "balanceWei": "427370158133660822",
+  "balanceTbnb": "0.427370158133660822",
+  "transientStorageProbeGas": "54360",
+  "budget": {
+    "baseV2V3Floor": "200000000000000000",
+    "gasPrice": "100000000",
+    "rawEstimatedV4DeploymentGas": "24892608",
+    "v4DeploymentGasBudget": "3236039040000000",
+    "v4TemporaryWbnb": "2100000000000000",
+    "v4FinalReserve": "20000000000000000",
+    "v4AddOnRequired": "100000000000000000",
+    "combinedRequiredBalance": "300000000000000000",
+    "combinedRequiredTbnb": "0.3",
+    "gasEstimates": {
+      "poolManager": "5286390",
+      "stateView": "820270",
+      "quoter": "1382217",
+      "positionDescriptor": "5303065",
+      "positionManager": "5298030",
+      "hookFactory": "199945",
+      "universalRouterV4": "4102691",
+      "dynamicFeeHookCreate2Allowance": "2500000"
+    }
+  }
+}
+
+=== PREFLIGHT ===
+Container bsc-uniswap-v2-v3-dexctl-run-916c1e48374c Creating
+Container bsc-uniswap-v2-v3-dexctl-run-916c1e48374c Created
+{
+  "ok": true,
+  "checkedAt": "2026-07-22T13:14:21.017Z",
+  "chainId": 97,
+  "providerNetwork": 97,
+  "latestBlock": 120624212,
+  "signer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "balanceWei": "427370158133660822",
+  "wrappedNative": {
+    "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    "name": "Wrapped BNB",
+    "symbol": "WBNB",
+    "decimals": 18,
+    "codeHash": "0xb7d84205eaaf83ce7b3940c6beaad6d22790255e34a9a2b486aa8cdfff118fe6"
+  },
+  "wrapProof": {
+    "performed": true,
+    "amount": "1000000000000",
+    "beforeBlock": 120624214,
+    "depositTx": "0xeb9b0f41709ded8454be5dab857d469c8d12ba03eb7806a33925ae45df71f535",
+    "depositBlock": 120624218,
+    "withdrawTx": "0x5eb1a8b5e71af33ce518e3f6400477cb351bc49d944ab185a6afdd54da5619a8",
+    "withdrawBlock": 120624232,
+    "beforeBalance": "0",
+    "afterDepositBalance": "1000000000000",
+    "afterWithdrawBalance": "0"
+  }
+}
+[2026-07-22 13:14:21.019 +0000] INFO (7): preflight passed
+    ok: true
+    checkedAt: "2026-07-22T13:14:21.017Z"
+    chainId: 97
+    providerNetwork: 97
+    latestBlock: 120624212
+    signer: "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342"
+    balanceWei: "427370158133660822"
+    wrappedNative: {
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "name": "Wrapped BNB",
+      "symbol": "WBNB",
+      "decimals": 18,
+      "codeHash": "0xb7d84205eaaf83ce7b3940c6beaad6d22790255e34a9a2b486aa8cdfff118fe6"
+    }
+    wrapProof: {
+      "performed": true,
+      "amount": "1000000000000",
+      "beforeBlock": 120624214,
+      "depositTx": "0xeb9b0f41709ded8454be5dab857d469c8d12ba03eb7806a33925ae45df71f535",
+      "depositBlock": 120624218,
+      "withdrawTx": "0x5eb1a8b5e71af33ce518e3f6400477cb351bc49d944ab185a6afdd54da5619a8",
+      "withdrawBlock": 120624232,
+      "beforeBalance": "0",
+      "afterDepositBalance": "1000000000000",
+      "afterWithdrawBalance": "0"
+    }
+
+=== DEPLOY V2/V3 CORE AND PERIPHERY ===
+Container bsc-uniswap-v2-v3-dexctl-run-b81e46cf775b Creating
+Container bsc-uniswap-v2-v3-dexctl-run-b81e46cf775b Created
+[2026-07-22 13:14:37.520 +0000] INFO (7): preflight passed
+    ok: true
+    checkedAt: "2026-07-22T13:14:37.519Z"
+    chainId: 97
+    providerNetwork: 97
+    latestBlock: 120624249
+    signer: "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342"
+    balanceWei: "427257031133660822"
+    wrappedNative: {
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "name": "Wrapped BNB",
+      "symbol": "WBNB",
+      "decimals": 18,
+      "codeHash": "0xb7d84205eaaf83ce7b3940c6beaad6d22790255e34a9a2b486aa8cdfff118fe6"
+    }
+    wrapProof: {
+      "performed": true,
+      "amount": "1000000000000",
+      "beforeBlock": 120624251,
+      "depositTx": "0xb8a5a8a8d6425892afb8cae21528d215382f7ed7068206adddcbfb366495c52f",
+      "depositBlock": 120624254,
+      "withdrawTx": "0x44b693962031f4848fbf00eee45820de66d8d7dbfc673ee08ba4371ecab04b4d",
+      "withdrawBlock": 120624268,
+      "beforeBalance": "0",
+      "afterDepositBalance": "1000000000000",
+      "afterWithdrawBalance": "0"
+    }
+[2026-07-22 13:14:44.267 +0000] INFO (7): V2 factory deployed
+    address: "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC"
+    tx: "0x028e8cf7d98f48d89d02d72c5d5865b74437f6021662c298b50c3b3dbd17b685"
+[2026-07-22 13:14:51.061 +0000] INFO (7): V2 Router02 deployed
+    address: "0x7408FF2F02A699281cC42E96990D8fb04945f04f"
+    tx: "0x3cdf24c9cae1f8fe582e37c6c41dcf2af35e6a47e4216823655feac8c78349d7"
+Step 1 complete [
+  {
+    message: 'Contract UniswapV3Factory deployed',
+    address: '0x2B67BA64476F9bbAaE766cF8869F0c718877aD44',
+    hash: '0x11cf516f76b4ad14021c609c481e115852db3c5792e9be7fe8798642bbd6ea6c'
+  }
+]
+Step 2 complete [
+  {
+    message: 'Contract UniswapInterfaceMulticall deployed',
+    address: '0xFB153b3F4260AeA7a3831FC80c54bEAFaCF0A736',
+    hash: '0xad25a4f4f7c924b478c54a6a5018227478f7ef5095beb2991206aa79364c33c9'
+  }
+]
+Step 3 complete [
+  {
+    message: 'Contract ProxyAdmin deployed',
+    address: '0xd00F9aE1d61B06deC9Ef12B6fC9185255dDC9d59',
+    hash: '0x53643decbc72ae207dd03a5380f1790414a8c3fc0879efa0885d94a96b93926e'
+  }
+]
+Step 4 complete [
+  {
+    message: 'Contract TickLens deployed',
+    address: '0xDa4C8786b481557aA04c9981aF901379A91BBE32',
+    hash: '0xa770d3c9262e6747e1c101f89781bb46c849c54ad9b53fd5a7842befa0a6b2ab'
+  }
+]
+Step 5 complete [
+  {
+    message: 'Library NFTDescriptor deployed',
+    address: '0x1672aa092B299D85011FFcCdfdc7434055F9ea26',
+    hash: '0xcb629c01b6cb5406c9884b1c591c4ed0404fd518331d8a2ce216f2ea79b22b01'
+  }
+]
+Step 6 complete [
+  {
+    message: 'Contract NonfungibleTokenPositionDescriptor deployed',
+    address: '0xa533519189E20D7dE16EE202066a0793DeB7aE09',
+    hash: '0x5f87aa38f2c6f9231d44fa1387ecc07202578d9b85c2e7baa136cab494f38e8a'
+  }
+]
+Step 7 complete [
+  {
+    message: 'Contract TransparentUpgradeableProxy deployed',
+    address: '0x66100dB4dC2F7b55B67D4a937B17744D5AEe9C4A',
+    hash: '0x96184cd71b885797e19ff474f388bc0b3c112f9042b81e6c26a7d4cf0ea61946'
+  }
+]
+Step 8 complete [
+  {
+    message: 'Contract NonfungiblePositionManager deployed',
+    address: '0xdCa665F889909E60F042512bE6Ea63dA5E19271E',
+    hash: '0x49a1a36b47e7da703b365f965775ac0a053c14bfcdd7cf8c7a068ffe6beef199'
+  }
+]
+Step 9 complete [
+  {
+    message: 'Contract V3Migrator deployed',
+    address: '0x74e18Ef0c9C4038efa2A99a2c042C97FB64606f7',
+    hash: '0x613aea9dc37b0dcd217c21c83b17c9e88b98c91ed0d5fedde7b48575e889bb9d'
+  }
+]
+Step 10 complete [
+  {
+    message: 'UniswapV3Factory owned by 0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342 already'
+  }
+]
+Step 11 complete [
+  {
+    message: 'Contract UniswapV3Staker deployed',
+    address: '0x267dAbb20aD82ab4f812F127f957Eb522753f543',
+    hash: '0xd3cefc6d1ecc19bdd2e562dea3bdf42621a48ca58eb90b59b776dca5f15b7cea'
+  }
+]
+Step 12 complete [
+  {
+    message: 'Contract QuoterV2 deployed',
+    address: '0xd384490F929977a8b9aF4d73Cd92e23e38C90401',
+    hash: '0x684ea700b0b043290ecb0aa68c26326e23eefde640cb0f63ac329f7dbdcfc029'
+  }
+]
+Step 13 complete [
+  {
+    message: 'Contract SwapRouter02 deployed',
+    address: '0x0A77a4F3bE72D863d74919c40fACdf47b2944223',
+    hash: '0xce467b5409adbbae224baa293cd5539afe68f7820e63719405599fb53d29ac12'
+  }
+]
+Step 14 complete [
+  {
+    message: 'ProxyAdmin owned by 0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342 already'
+  }
+]
+Deployment succeeded
+[[{"message":"Contract UniswapV3Factory deployed","address":"0x2B67BA64476F9bbAaE766cF8869F0c718877aD44","hash":"0x11cf516f76b4ad14021c609c481e115852db3c5792e9be7fe8798642bbd6ea6c"}],[{"message":"Contract UniswapInterfaceMulticall deployed","address":"0xFB153b3F4260AeA7a3831FC80c54bEAFaCF0A736","hash":"0xad25a4f4f7c924b478c54a6a5018227478f7ef5095beb2991206aa79364c33c9"}],[{"message":"Contract ProxyAdmin deployed","address":"0xd00F9aE1d61B06deC9Ef12B6fC9185255dDC9d59","hash":"0x53643decbc72ae207dd03a5380f1790414a8c3fc0879efa0885d94a96b93926e"}],[{"message":"Contract TickLens deployed","address":"0xDa4C8786b481557aA04c9981aF901379A91BBE32","hash":"0xa770d3c9262e6747e1c101f89781bb46c849c54ad9b53fd5a7842befa0a6b2ab"}],[{"message":"Library NFTDescriptor deployed","address":"0x1672aa092B299D85011FFcCdfdc7434055F9ea26","hash":"0xcb629c01b6cb5406c9884b1c591c4ed0404fd518331d8a2ce216f2ea79b22b01"}],[{"message":"Contract NonfungibleTokenPositionDescriptor deployed","address":"0xa533519189E20D7dE16EE202066a0793DeB7aE09","hash":"0x5f87aa38f2c6f9231d44fa1387ecc07202578d9b85c2e7baa136cab494f38e8a"}],[{"message":"Contract TransparentUpgradeableProxy deployed","address":"0x66100dB4dC2F7b55B67D4a937B17744D5AEe9C4A","hash":"0x96184cd71b885797e19ff474f388bc0b3c112f9042b81e6c26a7d4cf0ea61946"}],[{"message":"Contract NonfungiblePositionManager deployed","address":"0xdCa665F889909E60F042512bE6Ea63dA5E19271E","hash":"0x49a1a36b47e7da703b365f965775ac0a053c14bfcdd7cf8c7a068ffe6beef199"}],[{"message":"Contract V3Migrator deployed","address":"0x74e18Ef0c9C4038efa2A99a2c042C97FB64606f7","hash":"0x613aea9dc37b0dcd217c21c83b17c9e88b98c91ed0d5fedde7b48575e889bb9d"}],[{"message":"UniswapV3Factory owned by 0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342 already"}],[{"message":"Contract UniswapV3Staker deployed","address":"0x267dAbb20aD82ab4f812F127f957Eb522753f543","hash":"0xd3cefc6d1ecc19bdd2e562dea3bdf42621a48ca58eb90b59b776dca5f15b7cea"}],[{"message":"Contract QuoterV2 deployed","address":"0xd384490F929977a8b9aF4d73Cd92e23e38C90401","hash":"0x684ea700b0b043290ecb0aa68c26326e23eefde640cb0f63ac329f7dbdcfc029"}],[{"message":"Contract SwapRouter02 deployed","address":"0x0A77a4F3bE72D863d74919c40fACdf47b2944223","hash":"0xce467b5409adbbae224baa293cd5539afe68f7820e63719405599fb53d29ac12"}],[{"message":"ProxyAdmin owned by 0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342 already"}]]
+Final state
+{"v3CoreFactoryAddress":"0x2B67BA64476F9bbAaE766cF8869F0c718877aD44","multicall2Address":"0xFB153b3F4260AeA7a3831FC80c54bEAFaCF0A736","proxyAdminAddress":"0xd00F9aE1d61B06deC9Ef12B6fC9185255dDC9d59","tickLensAddress":"0xDa4C8786b481557aA04c9981aF901379A91BBE32","nftDescriptorLibraryAddressV1_3_0":"0x1672aa092B299D85011FFcCdfdc7434055F9ea26","nonfungibleTokenPositionDescriptorAddressV1_3_0":"0xa533519189E20D7dE16EE202066a0793DeB7aE09","descriptorProxyAddress":"0x66100dB4dC2F7b55B67D4a937B17744D5AEe9C4A","nonfungibleTokenPositionManagerAddress":"0xdCa665F889909E60F042512bE6Ea63dA5E19271E","v3MigratorAddress":"0x74e18Ef0c9C4038efa2A99a2c042C97FB64606f7","v3StakerAddress":"0x267dAbb20aD82ab4f812F127f957Eb522753f543","quoterV2Address":"0xd384490F929977a8b9aF4d73Cd92e23e38C90401","swapRouter02":"0x0A77a4F3bE72D863d74919c40fACdf47b2944223"}
+{
+  "schemaVersion": 1,
+  "network": {
+    "id": "bsc-testnet",
+    "name": "BNB Smart Chain Testnet",
+    "chainId": 97,
+    "nativeCurrency": {
+      "name": "Test BNB",
+      "symbol": "tBNB",
+      "decimals": 18
+    }
+  },
+  "deployer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "temporaryOwner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "finalOwner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "contracts": {
+    "wrappedNative": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    "v2Factory": "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC",
+    "v2Router02": "0x7408FF2F02A699281cC42E96990D8fb04945f04f",
+    "v3Factory": "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44",
+    "multicall2": "0xFB153b3F4260AeA7a3831FC80c54bEAFaCF0A736",
+    "proxyAdmin": "0xd00F9aE1d61B06deC9Ef12B6fC9185255dDC9d59",
+    "tickLens": "0xDa4C8786b481557aA04c9981aF901379A91BBE32",
+    "nftDescriptorLibrary": "0x1672aa092B299D85011FFcCdfdc7434055F9ea26",
+    "positionDescriptorImplementation": "0xa533519189E20D7dE16EE202066a0793DeB7aE09",
+    "positionDescriptorProxy": "0x66100dB4dC2F7b55B67D4a937B17744D5AEe9C4A",
+    "positionManager": "0xdCa665F889909E60F042512bE6Ea63dA5E19271E",
+    "v3Migrator": "0x74e18Ef0c9C4038efa2A99a2c042C97FB64606f7",
+    "v3Staker": "0x267dAbb20aD82ab4f812F127f957Eb522753f543",
+    "quoterV2": "0xd384490F929977a8b9aF4d73Cd92e23e38C90401",
+    "swapRouter02": "0x0A77a4F3bE72D863d74919c40fACdf47b2944223"
+  },
+  "transactions": {
+    "v2Factory": "0x028e8cf7d98f48d89d02d72c5d5865b74437f6021662c298b50c3b3dbd17b685",
+    "v2Router02": "0x3cdf24c9cae1f8fe582e37c6c41dcf2af35e6a47e4216823655feac8c78349d7"
+  },
+  "initCodeHashes": {
+    "v2Pair": "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f",
+    "v3Pool": "0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54"
+  },
+  "createdAt": "2026-07-22T13:14:37.521Z",
+  "deploymentBlock": 120624284,
+  "updatedAt": "2026-07-22T13:16:08.977Z",
+  "sourcePackages": {
+    "v2Core": "@uniswap/v2-core@1.0.1",
+    "v2Periphery": "@uniswap/v2-periphery@1.1.0-beta.0",
+    "deployV3": {
+      "source": "https://github.com/Uniswap/deploy-v3.git#v1.0.3",
+      "commit": "7edc8a215f698d6bf624cf79abbd04634fb62528"
+    }
+  },
+  "deploymentStatus": "core_contracts_deployed_pending_bootstrap_smoke_handoff"
+}
+[2026-07-22 13:16:08.977 +0000] INFO (7): V3 deployment validated
+    v3Factory: "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44"
+    positionManager: "0xdCa665F889909E60F042512bE6Ea63dA5E19271E"
+
+=== DEPLOY AND CONFIGURE FRESH TEST TOKENS ===
+=== PREPARE WRITABLE DEPLOYMENT DIRECTORY ===
+Config backup: /home/cheyne/bsc-uniswap-v2-v3-stack/config/chains/bsc-testnet.yml.before-test-tokens-20260722-231610
+
+=== DEPLOY OR REUSE TWO TEST ERC-20 TOKENS ===
+Container bsc-uniswap-v2-v3-dexctl-run-b3f692d7fd1b Creating
+Container bsc-uniswap-v2-v3-dexctl-run-b3f692d7fd1b Created
+SENT: TOKEN_A deployment 0xde51f139ed50852dcdb22efc476400358156db50491e226669b62d314aa4b4ef
+PASS: deployed TOKEN_A tUSDC at 0x813fB80c189A5AD48f537706c266F375820AB551
+SENT: TOKEN_B deployment 0xc363b523ccfc9475ae27388c19b16f57dedb32f0a6dd3b6439af31151c4458c9
+PASS: deployed TOKEN_B tDEX at 0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA
+{
+  "ok": true,
+  "chainId": 97,
+  "deployer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "compiler": "solc 0.8.26+commit.8a97fa7a",
+  "contract": "contracts/TestERC20.sol:TestERC20",
+  "creationBytecodeHash": "0xa42e0bdb20c09b436f9cbb0b19346cd654b8f6a95689792e8de917d96c5469e3",
+  "generatedAt": "2026-07-22T13:16:25.199Z",
+  "tokens": {
+    "TOKEN_A": {
+      "address": "0x813fB80c189A5AD48f537706c266F375820AB551",
+      "name": "Test USD Coin",
+      "symbol": "tUSDC",
+      "decimals": 6,
+      "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+      "totalSupply": "10000000000000",
+      "deployerBalance": "10000000000000",
+      "runtimeCodeHash": "0x9b5768b7b78cec46a3839aba96e4439a7e846d4cee84b4dd9cee2e3e8e8bbeaa",
+      "reused": false,
+      "deployTx": "0xde51f139ed50852dcdb22efc476400358156db50491e226669b62d314aa4b4ef",
+      "deployBlock": 120624492,
+      "gasUsed": "626236"
+    },
+    "TOKEN_B": {
+      "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+      "name": "Test DEX Token",
+      "symbol": "tDEX",
+      "decimals": 18,
+      "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+      "totalSupply": "10000000000000000000000000",
+      "deployerBalance": "10000000000000000000000000",
+      "runtimeCodeHash": "0xf54f3193ff2cb2495b0b1bd2ad8e759b8a7509b881e1ed520609cd7f3680c534",
+      "reused": false,
+      "deployTx": "0xc363b523ccfc9475ae27388c19b16f57dedb32f0a6dd3b6439af31151c4458c9",
+      "deployBlock": 120624507,
+      "gasUsed": "626272"
+    }
+  }
+}
+
+=== UPDATE BSC TESTNET PROFILE ===
+
+=== TEST TOKEN RESULT ===
+TOKEN_A: Test USD Coin (tUSDC)
+  Address: 0x813fB80c189A5AD48f537706c266F375820AB551
+  Deployer balance: 10,000,000.000000 tUSDC
+TOKEN_B: Test DEX Token (tDEX)
+  Address: 0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA
+  Deployer balance: 10,000,000.000000 tDEX
+Deployer: 0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342
+
+=== ENABLED BOOTSTRAP CONFIG ===
+bootstrap:
+  wrap_native_if_needed: true
+  tokens:
+    TOKEN_A:
+      enabled: true
+      address: "0x813fB80c189A5AD48f537706c266F375820AB551"
+    TOKEN_B:
+      enabled: true
+      address: "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+  v2_pairs:
+    - enabled: true
+      token_a: WBNB
+      token_b: TOKEN_A
+      amount_a: "0.01"
+      amount_b: "1000"
+    - enabled: true
+      token_a: TOKEN_A
+      token_b: TOKEN_B
+      amount_a: "1000"
+      amount_b: "1000"
+  v3_pools:
+    - enabled: true
+      token_a: WBNB
+      token_b: TOKEN_B
+      fee: 3000
+      amount_a: "0.01"
+      amount_b: "1000"
+      tick_width_spacings: 120
+    - enabled: true
+      token_a: TOKEN_A
+      token_b: TOKEN_B
+      fee: 500
+      amount_a: "1000"
+      amount_b: "1000"
+      tick_width_spacings: 200
+
+v4:
+  enabled_from_env: DEPLOY_V4_SYSTEM
+  hooks_enabled: true
+  core_package: "@uniswap/v4-core@1.0.2"
+  periphery_package: "@uniswap/v4-periphery@1.0.3"
+  universal_router_package: "@uniswap/universal-router@2.1.0"
+  pools:
+    - enabled: true
+      token_a: WBNB
+      token_b: TOKEN_A
+      fee: 3000
+      tick_spacing: 60
+      amount_a: "0.002"
+      amount_b: "200"
+    - enabled: true
+      token_a: TOKEN_A
+      token_b: TOKEN_B
+      fee: 8388608
+      dynamic_fee: true
+      tick_spacing: 10
+      amount_a: "200"
+      amount_b: "200"
+      hook:
+        mode: bundled_dynamic_fee
+        initial_fee: 500
+        data: "0x"
+  smoke:
+    token_in: TOKEN_A
+    token_out: TOKEN_B
+    amount_in: "1"
+    dynamic_fee_override: 700
+
+smoke:
+
+======================================================
+PASS: TEST TOKENS DEPLOYED, MINTED AND CONFIGURED
+======================================================
+
+Next commands:
+  cd /home/cheyne/bsc-uniswap-v2-v3-stack
+  ./dexctl bootstrap
+  ./dexctl smoke
+  ./dexctl status
+
+=== CREATE V2 PAIRS AND V3 NFT POSITIONS ===
+Container bsc-uniswap-v2-v3-dexctl-run-35add9661890 Creating
+Container bsc-uniswap-v2-v3-dexctl-run-35add9661890 Created
+[2026-07-22 13:16:53.117 +0000] INFO (7): V2 liquidity added
+    pair: "0x1729F84d75685609127614132C6E6D53b888e0a7"
+    symbols: "WBNB/tUSDC"
+    tx: "0x9a17a35ab25f743cbf5807d2e398e1a7717251299d96946ef6c58efee71730e7"
+[2026-07-22 13:17:06.058 +0000] INFO (7): V2 liquidity added
+    pair: "0x9dEebd9eEFf4B1Ac8382fB564Fb985bF1dF5DeEE"
+    symbols: "tUSDC/tDEX"
+    tx: "0x3c9f874d436a3fd5e9b93ece427f478682a9cf9473af1aee9866953c2360df6d"
+[2026-07-22 13:17:12.356 +0000] INFO (7): V3 pool created and initialized
+    pool: "0x5A4d111F39D61Ef67E30c0c7319561cD0c13D385"
+    tx: "0xf5c9437bcd691bd68ef2206a8bb121085ff5f6e0a94bc53f0b255358d8d03a2e"
+    block: 120624612
+[2026-07-22 13:17:31.073 +0000] INFO (7): concentrated V3 NFT position minted
+    pool: "0x5A4d111F39D61Ef67E30c0c7319561cD0c13D385"
+    tokenId: "1"
+    tickLower: -122340
+    tickUpper: -107940
+    tx: "0x7940671de5a3c213750ca771773ffeca4369de22faffefd2147ae95ca4a6ff7d"
+[2026-07-22 13:17:37.750 +0000] INFO (7): V3 pool created and initialized
+    pool: "0xA5B245f78D4EecC7A00c6D79F405ac6D3eF45Df3"
+    tx: "0x11cc29489b0c399a90da03fbdbb3ab63d40aa4ad2cce54891d7dd23b353171fe"
+    block: 120624669
+{
+  "schemaVersion": 1,
+  "tokens": {
+    "WBNB": {
+      "configuredSymbol": "WBNB",
+      "symbol": "WBNB",
+      "name": "Wrapped BNB",
+      "decimals": 18,
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+    },
+    "TOKEN_A": {
+      "configuredSymbol": "TOKEN_A",
+      "symbol": "tUSDC",
+      "name": "Test USD Coin",
+      "decimals": 6,
+      "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+    },
+    "TOKEN_B": {
+      "configuredSymbol": "TOKEN_B",
+      "symbol": "tDEX",
+      "name": "Test DEX Token",
+      "decimals": 18,
+      "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+    }
+  },
+  "v2Pairs": {
+    "0x813fb80c189a5ad48f537706c266f375820ab551:0xae13d989dac2f0debff460ac112a837c89baa7cd": {
+      "tokenA": {
+        "configuredSymbol": "WBNB",
+        "symbol": "WBNB",
+        "name": "Wrapped BNB",
+        "decimals": 18,
+        "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+      },
+      "tokenB": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "amountA": "10000000000000000",
+      "amountB": "1000000000",
+      "pair": "0x1729F84d75685609127614132C6E6D53b888e0a7",
+      "liquidityTx": "0x9a17a35ab25f743cbf5807d2e398e1a7717251299d96946ef6c58efee71730e7",
+      "blockNumber": 120624569,
+      "reserve0": "1000000000",
+      "reserve1": "10000000000000000",
+      "ownerLpBalance": "3162277659168"
+    },
+    "0x61c01d869d84a55e0e94a419304fdf2babbd9faa:0x813fb80c189a5ad48f537706c266f375820ab551": {
+      "tokenA": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "tokenB": {
+        "configuredSymbol": "TOKEN_B",
+        "symbol": "tDEX",
+        "name": "Test DEX Token",
+        "decimals": 18,
+        "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+      },
+      "amountA": "1000000000",
+      "amountB": "1000000000000000000000",
+      "pair": "0x9dEebd9eEFf4B1Ac8382fB564Fb985bF1dF5DeEE",
+      "liquidityTx": "0x3c9f874d436a3fd5e9b93ece427f478682a9cf9473af1aee9866953c2360df6d",
+      "blockNumber": 120624598,
+      "reserve0": "1000000000000000000000",
+      "reserve1": "1000000000",
+      "ownerLpBalance": "999999999999000"
+    }
+  },
+  "v3Pools": {
+    "0x61c01d869d84a55e0e94a419304fdf2babbd9faa:0xae13d989dac2f0debff460ac112a837c89baa7cd:3000": {
+      "token0": {
+        "configuredSymbol": "TOKEN_B",
+        "symbol": "tDEX",
+        "name": "Test DEX Token",
+        "decimals": 18,
+        "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+      },
+      "token1": {
+        "configuredSymbol": "WBNB",
+        "symbol": "WBNB",
+        "name": "Wrapped BNB",
+        "decimals": 18,
+        "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+      },
+      "fee": 3000,
+      "pool": "0x5A4d111F39D61Ef67E30c0c7319561cD0c13D385",
+      "initializeTx": "0xf5c9437bcd691bd68ef2206a8bb121085ff5f6e0a94bc53f0b255358d8d03a2e",
+      "mintTx": "0x7940671de5a3c213750ca771773ffeca4369de22faffefd2147ae95ca4a6ff7d",
+      "blockNumber": 120624654,
+      "tokenId": "1",
+      "tickLower": -122340,
+      "tickUpper": -107940,
+      "currentTickAtMint": -115136,
+      "liquidity": "10454324557979861576",
+      "amount0Desired": "1000000000000000000000",
+      "amount1Desired": "10000000000000000"
+    },
+    "0x61c01d869d84a55e0e94a419304fdf2babbd9faa:0x813fb80c189a5ad48f537706c266f375820ab551:500": {
+      "token0": {
+        "configuredSymbol": "TOKEN_B",
+        "symbol": "tDEX",
+        "name": "Test DEX Token",
+        "decimals": 18,
+        "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+      },
+      "token1": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "fee": 500,
+      "pool": "0xA5B245f78D4EecC7A00c6D79F405ac6D3eF45Df3",
+      "initializeTx": "0x11cc29489b0c399a90da03fbdbb3ab63d40aa4ad2cce54891d7dd23b353171fe",
+      "mintTx": "0xd0e5f93ea979572395dcc9f1c5b7b4ff755c3fbf4be0b4b6a8ff8ba23b0a78eb",
+      "blockNumber": 120624698,
+      "tokenId": "2",
+      "tickLower": -278320,
+      "tickUpper": -274320,
+      "currentTickAtMint": -276325,
+      "liquidity": "10488755534157289",
+      "amount0Desired": "1000000000000000000000",
+      "amount1Desired": "1000000000"
+    }
+  },
+  "createdAt": "2026-07-22T13:16:33.821Z",
+  "wrapTx": "0xf5b82b374c920ccdebc59aeb3787b85743400b3b0a40061a08d75283b495feda",
+  "completedAt": "2026-07-22T13:17:51.071Z",
+  "ok": true
+}
+[2026-07-22 13:17:51.071 +0000] INFO (7): concentrated V3 NFT position minted
+    pool: "0xA5B245f78D4EecC7A00c6D79F405ac6D3eF45Df3"
+    tokenId: "2"
+    tickLower: -278320
+    tickUpper: -274320
+    tx: "0xd0e5f93ea979572395dcc9f1c5b7b4ff755c3fbf4be0b4b6a8ff8ba23b0a78eb"
+
+=== CORE SWAP AND LIQUIDITY TESTS ===
+Container bsc-uniswap-v2-v3-dexctl-run-a5d8c6480a9c Creating
+Container bsc-uniswap-v2-v3-dexctl-run-a5d8c6480a9c Created
+[2026-07-22 13:18:00.306 +0000] INFO (7): direct V2 swap passed
+    tx: "0x1dc43898a4a8fb06a48c7598e504bdcb33a6d4f2e74cbeadc8a2cded1e7b7a99"
+[2026-07-22 13:18:14.464 +0000] INFO (7): direct V3 swap passed
+    tx: "0xe391424158541be3e72b20c36f82242695bad38799a2b2b28425a9e192c66700"
+{
+  "ok": true,
+  "mode": "core-v2-v3-with-swaprouter02",
+  "completedAt": "2026-07-22T13:18:33.267Z",
+  "v2LpProof": {
+    "pair": "0x1729F84d75685609127614132C6E6D53b888e0a7",
+    "ownerBalance": "3162277659168"
+  },
+  "positionLifecycle": {
+    "tokenId": "2",
+    "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+    "increaseTx": "0x2687e05e87d410e7ac415a6f34fa6826669150503d17719bd381aa6f57e0b3c1",
+    "decreaseTx": "0x954798f9af7c50a88235ef13d5a16689f9852380c8bd8ce1e84cc8d77be7255e",
+    "collectTx": "0x563de63270f88129ac416175bc949399d8ff091a66fdb5f60ecbe90980312769",
+    "liquidityTested": "10499248533161"
+  },
+  "swaps": [
+    {
+      "protocol": "v2",
+      "approvalTx": null,
+      "tx": "0x1dc43898a4a8fb06a48c7598e504bdcb33a6d4f2e74cbeadc8a2cded1e7b7a99",
+      "blockNumber": 120624720,
+      "quoted": "996006981039903216",
+      "minimumOut": "946206631987908055",
+      "received": "996006981039903216"
+    },
+    {
+      "protocol": "v3",
+      "fee": 500,
+      "approvalTx": "0xc2c818dac0aea4a56672b47f8e9589f6e7dfe8e5c193724f38ad9b2c3d3a94b8",
+      "tx": "0xe391424158541be3e72b20c36f82242695bad38799a2b2b28425a9e192c66700",
+      "blockNumber": 120624750,
+      "quoted": "999404764196423367",
+      "minimumOut": "949434525986602198",
+      "received": "999404764196423367"
+    }
+  ]
+}
+
+=== PERMIT2 + UNIVERSAL ROUTER V2/V3 TESTS ===
+Container bsc-uniswap-v2-v3-dexctl-run-7dff6e8cdf49 Creating
+Container bsc-uniswap-v2-v3-dexctl-run-7dff6e8cdf49 Created
+[2026-07-22 13:18:39.124 +0000] INFO (7): Permit2 deployment sent
+    tx: "0x2e68f3f304bd76666b980f92758c989b89f8c523e096c0985bde139d12dfc699"
+[2026-07-22 13:18:43.673 +0000] INFO (7): Permit2 deployed
+    address: "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694"
+    tx: "0x2e68f3f304bd76666b980f92758c989b89f8c523e096c0985bde139d12dfc699"
+[2026-07-22 13:18:45.722 +0000] INFO (7): Universal Router v1.6.0 deployment sent
+    tx: "0xd8dcd6f1707d466d00f5bd45a5dfdaf4f17f939cf8c27d296bab99d713e1f38c"
+[2026-07-22 13:18:50.243 +0000] INFO (7): Universal Router v1.6.0 deployed
+    address: "0x4527Df451c24d7d073166518c7a5601Cd722d8B7"
+    tx: "0xd8dcd6f1707d466d00f5bd45a5dfdaf4f17f939cf8c27d296bab99d713e1f38c"
+[2026-07-22 13:19:09.579 +0000] INFO (7): Universal Router direct V2 swap passed
+    tx: "0x4c62d84ad43aa61bd99e0cd8c4da5a3cfe29db9fdb8cef78ffd07d4a046b4508"
+    received: "994021919267126764"
+[2026-07-22 13:19:15.960 +0000] INFO (7): Universal Router direct V3 swap passed
+    tx: "0xadd79e39fc01c41ed734590210d83177c758957ef8baa4ec62403d91584e449e"
+    received: "999214328883393794"
+{
+  "ok": true,
+  "chainId": 97,
+  "deployer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "completedAt": "2026-07-22T13:19:23.560Z",
+  "contracts": {
+    "permit2": {
+      "address": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+      "reused": false,
+      "transactionHash": "0x2e68f3f304bd76666b980f92758c989b89f8c523e096c0985bde139d12dfc699",
+      "blockNumber": 120624815,
+      "gasUsed": "2021754"
+    },
+    "universalRouter": {
+      "address": "0x4527Df451c24d7d073166518c7a5601Cd722d8B7",
+      "reused": false,
+      "transactionHash": "0xd8dcd6f1707d466d00f5bd45a5dfdaf4f17f939cf8c27d296bab99d713e1f38c",
+      "blockNumber": 120624831,
+      "gasUsed": "3956856"
+    }
+  },
+  "constructorParameters": {
+    "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+    "weth9": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    "seaportV1_5": "0x0000000000000000000000000000000000000000",
+    "seaportV1_4": "0x0000000000000000000000000000000000000000",
+    "openseaConduit": "0x0000000000000000000000000000000000000000",
+    "nftxZap": "0x0000000000000000000000000000000000000000",
+    "x2y2": "0x0000000000000000000000000000000000000000",
+    "foundation": "0x0000000000000000000000000000000000000000",
+    "sudoswap": "0x0000000000000000000000000000000000000000",
+    "elementMarket": "0x0000000000000000000000000000000000000000",
+    "nft20Zap": "0x0000000000000000000000000000000000000000",
+    "cryptopunks": "0x0000000000000000000000000000000000000000",
+    "looksRareV2": "0x0000000000000000000000000000000000000000",
+    "routerRewardsDistributor": "0x0000000000000000000000000000000000000000",
+    "looksRareRewardsDistributor": "0x0000000000000000000000000000000000000000",
+    "looksRareToken": "0x0000000000000000000000000000000000000000",
+    "v2Factory": "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC",
+    "v3Factory": "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44",
+    "pairInitCodeHash": "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f",
+    "poolInitCodeHash": "0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54"
+  },
+  "smoke": {
+    "approvals": {
+      "erc20ApprovalTx": "0x15205cf3600ca5487eeb394332c28a6441046c41209ede5e40f457f30cbff7f6",
+      "permit2ApprovalTx": "0x8994d732ca942d8756e9148fa5957b82a15090ae54e8787d93b159b250de762b"
+    },
+    "tests": [
+      {
+        "protocol": "universal-router-v2",
+        "tx": "0x4c62d84ad43aa61bd99e0cd8c4da5a3cfe29db9fdb8cef78ffd07d4a046b4508",
+        "blockNumber": 120624873,
+        "received": "994021919267126764",
+        "commands": "0x08",
+        "quoted": "994021919267126764",
+        "minimumOut": "944320823303770425"
+      },
+      {
+        "protocol": "universal-router-v3",
+        "tx": "0xadd79e39fc01c41ed734590210d83177c758957ef8baa4ec62403d91584e449e",
+        "blockNumber": 120624888,
+        "received": "999214328883393794",
+        "commands": "0x00",
+        "quoted": "999214328883393794",
+        "minimumOut": "949253612439224104"
+      },
+      {
+        "protocol": "universal-router-v2-to-v3",
+        "tx": "0x7ac28c0d458a4d7fb22191db0b3f33e76467d642e6052734df203d84f7a6468f",
+        "blockNumber": 120624903,
+        "received": "992720773120017070",
+        "commands": "0x0800",
+        "quoted": "992720773120017070",
+        "minimumOut": "943084734464016216",
+        "bridgeAmount": "9960069810399"
+      }
+    ],
+    "stranded": {
+      "tUSDC": "0",
+      "tDEX": "0",
+      "WBNB": "0"
+    }
+  }
+}
+[2026-07-22 13:19:23.150 +0000] INFO (7): Universal Router mixed V2 to V3 swap passed
+    tx: "0x7ac28c0d458a4d7fb22191db0b3f33e76467d642e6052734df203d84f7a6468f"
+    received: "992720773120017070"
+
+=== DEPLOY FULL UNISWAP V4 SINGLETON, HOOK AND UNIVERSAL ROUTER ===
+Container bsc-uniswap-v2-v3-dexctl-run-27da47e59fa3 Creating
+Container bsc-uniswap-v2-v3-dexctl-run-27da47e59fa3 Created
+[2026-07-22 13:19:30.377 +0000] INFO (7): V4 contract deployed
+    contract: "PoolManager"
+    address: "0xbf27C8273Fd07b6A14f536cc6d32989176F57352"
+    tx: "0xc958e67fcf82aa4c9c9866c84fbb7694fca2262d8a5dd3da3bf6c71079b5564e"
+[2026-07-22 13:19:35.519 +0000] INFO (7): V4 contract deployed
+    contract: "StateView"
+    address: "0x03F93fFdA821CfA7915448c30eBda20B60084049"
+    tx: "0x226aaf3096812db7f5a2d761d467754f1ba4c951e6b24d6dc248d88cc30b5148"
+[2026-07-22 13:19:40.893 +0000] INFO (7): V4 contract deployed
+    contract: "V4Quoter"
+    address: "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f"
+    tx: "0x45c060eb8c5c35f12412906f166e8b88c2165a16aefadeb1559b6fe7d6364b2d"
+[2026-07-22 13:19:46.867 +0000] INFO (7): V4 contract deployed
+    contract: "PositionDescriptor"
+    address: "0x628FE5b005AA96268d5CA73dF940d42edfe75E59"
+    tx: "0x76eeff4605a55523de9846de26689f0033582ed0b7e2ed8de0b9f846b1a41a2b"
+[2026-07-22 13:19:53.476 +0000] INFO (7): V4 contract deployed
+    contract: "PositionManager"
+    address: "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C"
+    tx: "0x2108f78179c5b90df765cf96809efee729494df7323651231f4877a28b4f8fa4"
+[2026-07-22 13:19:59.994 +0000] INFO (7): V4 contract deployed
+    contract: "HookFactory"
+    address: "0x92951977D0a6B1E8eeB0068c74DfE87Aa680fa40"
+    tx: "0x0ab83ba9ab7dd9c9733a7d8941e5c832c70e613381323c6404beb59ce8b60e15"
+[2026-07-22 13:20:06.780 +0000] INFO (7): V4 contract deployed
+    contract: "UniversalRouterV4"
+    address: "0x38131b4E54748D376F6F588CF13F80c3d1b6A711"
+    tx: "0x1f43eb43797910e87d51d7cf60cb6759b80f26e67df98b14667e52118f561fbe"
+{
+  "ok": true,
+  "enabled": true,
+  "fullExecution": true,
+  "chainId": 97,
+  "deployer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "startedAt": "2026-07-22T13:19:27.100Z",
+  "packages": {
+    "core": "@uniswap/v4-core@1.0.2",
+    "periphery": "@uniswap/v4-periphery@1.0.3",
+    "universalRouter": "@uniswap/universal-router@2.1.0",
+    "localHookCompiler": "solc@0.8.26"
+  },
+  "transientStorageProbeGas": "54360",
+  "budget": {
+    "gasPrice": "100000000",
+    "rawEstimatedDeploymentGas": "24892608",
+    "gasEstimates": {
+      "poolManager": "5286390",
+      "stateView": "820270",
+      "quoter": "1382217",
+      "positionDescriptor": "5303065",
+      "positionManager": "5298030",
+      "hookFactory": "199945",
+      "universalRouterV4": "4102691",
+      "dynamicFeeHookCreate2Allowance": "2500000"
+    },
+    "multiplierBps": 13000,
+    "deploymentGasBudget": "3236039040000000",
+    "temporaryWbnb": "2100000000000000",
+    "finalReserve": "20000000000000000",
+    "fixedFloor": "100000000000000000",
+    "v4AddOnRequired": "100000000000000000",
+    "baseV2V3Floor": "0",
+    "requiredBalance": "100000000000000000"
+  },
+  "predictedAddresses": {
+    "poolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+    "stateView": "0x03F93fFdA821CfA7915448c30eBda20B60084049",
+    "quoter": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+    "positionDescriptor": "0x628FE5b005AA96268d5CA73dF940d42edfe75E59",
+    "positionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+    "hookFactory": "0x92951977D0a6B1E8eeB0068c74DfE87Aa680fa40",
+    "universalRouterV4": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711"
+  },
+  "universalRouterConstructor": {
+    "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+    "weth9": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    "v2Factory": "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC",
+    "v3Factory": "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44",
+    "pairInitCodeHash": "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f",
+    "poolInitCodeHash": "0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54",
+    "v4PoolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+    "v3NFTPositionManager": "0xdCa665F889909E60F042512bE6Ea63dA5E19271E",
+    "v4PositionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+    "spokePool": "0x0000000000000000000000000000000000000000"
+  },
+  "contracts": {
+    "poolManager": {
+      "address": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+      "tx": "0xc958e67fcf82aa4c9c9866c84fbb7694fca2262d8a5dd3da3bf6c71079b5564e",
+      "blockNumber": 120624927,
+      "gasUsed": "5243607",
+      "artifact": "@uniswap/v4-core/out/PoolManager.sol/PoolManager.json"
+    },
+    "stateView": {
+      "address": "0x03F93fFdA821CfA7915448c30eBda20B60084049",
+      "tx": "0x226aaf3096812db7f5a2d761d467754f1ba4c951e6b24d6dc248d88cc30b5148",
+      "blockNumber": 120624933,
+      "gasUsed": "812653",
+      "artifact": "@uniswap/v4-periphery/foundry-out/StateView.sol/StateView.json"
+    },
+    "quoter": {
+      "address": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+      "tx": "0x45c060eb8c5c35f12412906f166e8b88c2165a16aefadeb1559b6fe7d6364b2d",
+      "blockNumber": 120624945,
+      "gasUsed": "1370175",
+      "artifact": "@uniswap/v4-periphery/foundry-out/V4Quoter.sol/V4Quoter.json"
+    },
+    "positionDescriptor": {
+      "address": "0x628FE5b005AA96268d5CA73dF940d42edfe75E59",
+      "tx": "0x76eeff4605a55523de9846de26689f0033582ed0b7e2ed8de0b9f846b1a41a2b",
+      "blockNumber": 120624957,
+      "gasUsed": "5260151",
+      "artifact": "@uniswap/v4-periphery/foundry-out/PositionDescriptor.sol/PositionDescriptor.json"
+    },
+    "positionManager": {
+      "address": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+      "tx": "0x2108f78179c5b90df765cf96809efee729494df7323651231f4877a28b4f8fa4",
+      "blockNumber": 120624971,
+      "gasUsed": "5255155",
+      "artifact": "@uniswap/v4-periphery/foundry-out/PositionManager.sol/PositionManager.json"
+    },
+    "hookFactory": {
+      "address": "0x92951977D0a6B1E8eeB0068c74DfE87Aa680fa40",
+      "tx": "0x0ab83ba9ab7dd9c9733a7d8941e5c832c70e613381323c6404beb59ce8b60e15",
+      "blockNumber": 120624985,
+      "gasUsed": "197213",
+      "artifact": "/app/artifacts-local/contracts/HookFactory.sol/HookFactory.json"
+    },
+    "universalRouterV4": {
+      "address": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+      "tx": "0x1f43eb43797910e87d51d7cf60cb6759b80f26e67df98b14667e52118f561fbe",
+      "blockNumber": 120625000,
+      "gasUsed": "4069228",
+      "artifact": "@uniswap/universal-router-v4/artifacts/contracts/UniversalRouter.sol/UniversalRouter.json"
+    },
+    "dynamicFeeHook": {
+      "address": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+      "tx": "0xfb1868b4438562fd64399cd73931b8cb7e5c34d8fe8c6adb045eb6e3a64a23c0",
+      "blockNumber": 120625015,
+      "gasUsed": "808813",
+      "artifact": "/app/artifacts-local/contracts/ConfigurableDynamicFeeHook.sol/ConfigurableDynamicFeeHook.json",
+      "salt": "0x0000000000000000000000000000000000000000000000000000000000001ad0",
+      "saltNonce": 6864,
+      "initCodeHash": "0x93363ced7bc5fd414826a0874e6ccb353d8a05d0a3493a2a63c2013674b21a01",
+      "permissionMask": 128,
+      "permissions": [
+        "beforeSwap"
+      ],
+      "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+      "initialFee": 500
+    }
+  },
+  "completedAt": "2026-07-22T13:20:13.913Z",
+  "highestDeploymentBlock": 120625015
+}
+
+=== INITIALIZE V4 POOLS AND MINT POSITIONMANAGER NFT LIQUIDITY ===
+Container bsc-uniswap-v2-v3-dexctl-run-e669cbaac00d Creating
+Container bsc-uniswap-v2-v3-dexctl-run-e669cbaac00d Created
+[2026-07-22 13:21:07.284 +0000] INFO (7): V4 PositionManager NFT minted and increase/decrease lifecycle passed
+    poolId: "0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486"
+    tokenId: "1"
+    pair: "tUSDC/WBNB"
+    mintTx: "0xa2c2a3db19b4d5dae4b5a484f53eb6998c96e31041150a50bc040c6cfe9409e9"
+{
+  "ok": true,
+  "enabled": true,
+  "fullExecution": true,
+  "chainId": 97,
+  "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "poolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+  "positionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+  "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+  "universalRouterV4": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+  "tokens": {
+    "WBNB": {
+      "configuredSymbol": "WBNB",
+      "symbol": "WBNB",
+      "name": "Wrapped BNB",
+      "decimals": 18,
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+    },
+    "TOKEN_A": {
+      "configuredSymbol": "TOKEN_A",
+      "symbol": "tUSDC",
+      "name": "Test USD Coin",
+      "decimals": 6,
+      "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+    },
+    "TOKEN_B": {
+      "configuredSymbol": "TOKEN_B",
+      "symbol": "tDEX",
+      "name": "Test DEX Token",
+      "decimals": 18,
+      "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+    }
+  },
+  "pools": {
+    "0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486": {
+      "poolId": "0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486",
+      "key": {
+        "currency0": "0x813fB80c189A5AD48f537706c266F375820AB551",
+        "currency1": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+        "fee": 3000,
+        "tickSpacing": 60,
+        "hooks": "0x0000000000000000000000000000000000000000"
+      },
+      "token0": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "token1": {
+        "configuredSymbol": "WBNB",
+        "symbol": "WBNB",
+        "name": "Wrapped BNB",
+        "decimals": 18,
+        "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+      },
+      "hook": {
+        "mode": "none",
+        "address": "0x0000000000000000000000000000000000000000",
+        "dynamicFee": false,
+        "initialFee": 3000,
+        "permissionMask": 0,
+        "hookData": "0x",
+        "codeHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "sqrtPriceX96": "250541448375047931186413801569606",
+      "tickLower": -887220,
+      "tickUpper": 887220,
+      "positionTokenId": "1",
+      "maximumLiquidity": "632455532033",
+      "mintedLiquidity": "569209978829",
+      "lifecycleLiquidity": "31622776601",
+      "activeLiquidity": "569209978829",
+      "amount0Maximum": "200000000",
+      "amount1Maximum": "2000000000000000",
+      "amount0NetUsed": "180000001",
+      "amount1NetUsed": "1799999999995864",
+      "approvals": {
+        "currency0": {
+          "erc20ApprovalTx": null,
+          "permit2ApprovalTx": "0x3ac50aa53e1db8526f4fb3dc83f7d98b7bf481525ac6e9cb9a2fb3528a525fcb"
+        },
+        "currency1": {
+          "erc20ApprovalTx": "0x1b2842822beca04f4a91819ca8a57dae4c1e3015b2a223d230d4e6e84ce2ed95",
+          "permit2ApprovalTx": "0x6bb88f6e34d9ea47cfe4c0849cd3a6664afd80445a7ae99b953503271c59ce3d"
+        }
+      },
+      "initializeTx": "0x630b3ebd8cb83e8ffd6f8f32754921afc7ae87c36498f8d24dde527728b98768",
+      "initializeBlock": 120625056,
+      "mintTx": "0xa2c2a3db19b4d5dae4b5a484f53eb6998c96e31041150a50bc040c6cfe9409e9",
+      "mintBlock": 120625107,
+      "increaseTx": "0x6d88676833628861a6158b02d8d7cfd454214e958282804c27882ca068ba7c64",
+      "increaseBlock": 120625128,
+      "decreaseTx": "0xacf88f410a6bbc1c733171faf3ce252c5e8c8406e50113cc2be0d730bc9261ee",
+      "decreaseBlock": 120625134,
+      "liquidityAfterMint": "569209978829",
+      "liquidityAfterIncrease": "600832755430",
+      "currentSqrtPriceX96": "250541448375047931186413801569606",
+      "currentTick": 161189
+    },
+    "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6": {
+      "poolId": "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6",
+      "key": {
+        "currency0": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+        "currency1": "0x813fB80c189A5AD48f537706c266F375820AB551",
+        "fee": 8388608,
+        "tickSpacing": 10,
+        "hooks": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080"
+      },
+      "token0": {
+        "configuredSymbol": "TOKEN_B",
+        "symbol": "tDEX",
+        "name": "Test DEX Token",
+        "decimals": 18,
+        "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+      },
+      "token1": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "hook": {
+        "mode": "bundled_dynamic_fee",
+        "address": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+        "dynamicFee": true,
+        "initialFee": 500,
+        "permissionMask": 128,
+        "hookData": "0x",
+        "codeHash": "0x483d05b3953229a68cdc724104b553825eff42f8b7490a0583d485907a8bb9d2"
+      },
+      "sqrtPriceX96": "79228162514264337593543",
+      "tickLower": -887270,
+      "tickUpper": 887270,
+      "positionTokenId": "2",
+      "maximumLiquidity": "199999999999999",
+      "mintedLiquidity": "179999999999999",
+      "lifecycleLiquidity": "9999999999999",
+      "activeLiquidity": "179999999999999",
+      "amount0Maximum": "200000000000000000000",
+      "amount1Maximum": "200000000",
+      "amount0NetUsed": "179999999999999000002",
+      "amount1NetUsed": "180000001",
+      "approvals": {
+        "currency0": {
+          "erc20ApprovalTx": "0x184a9910c863dcb2085766ab112e66b7fb1df6e82665dbe6164c83076b450563",
+          "permit2ApprovalTx": "0x1514d673fb0ad0765819a447da55b100127091c5e8645dc647088bd962b8177f"
+        },
+        "currency1": {
+          "erc20ApprovalTx": null,
+          "permit2ApprovalTx": null
+        }
+      },
+      "initializeTx": "0x22be3a4c4d9355e6e97cd59d86f308b07510d12df4be17e08854f02c0f912373",
+      "initializeBlock": 120625149,
+      "mintTx": "0xeb90501016bc5ca835c288ce909b884754e4774744eae0ed7f04fb29bdb75068",
+      "mintBlock": 120625200,
+      "increaseTx": "0xe5734ba2827c9c9e39342992c65dc432205f0364eac4e852319129d42bc603bf",
+      "increaseBlock": 120625214,
+      "decreaseTx": "0x7f2b1bd31c088d38c66fc014c7fc0f7d48314d702d8c2f2b0b24e26946e23352",
+      "decreaseBlock": 120625228,
+      "liquidityAfterMint": "179999999999999",
+      "liquidityAfterIncrease": "189999999999998",
+      "currentSqrtPriceX96": "79228162514264337593543",
+      "currentTick": -276325
+    }
+  },
+  "startedAt": "2026-07-22T13:20:22.973Z",
+  "wrapTx": "0x920da8e376b056b8ed67647cf111cb739b2ab4d193f2cf257fc272e096d9ecac",
+  "completedAt": "2026-07-22T13:21:49.840Z",
+  "highestBootstrapBlock": 120625228
+}
+[2026-07-22 13:21:49.840 +0000] INFO (7): V4 PositionManager NFT minted and increase/decrease lifecycle passed
+    poolId: "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6"
+    tokenId: "2"
+    pair: "tDEX/tUSDC"
+    mintTx: "0xeb90501016bc5ca835c288ce909b884754e4774744eae0ed7f04fb29bdb75068"
+
+=== FULL V4 DIRECT, DYNAMIC-FEE AND MIXED UNIVERSAL ROUTER TESTS ===
+Container bsc-uniswap-v2-v3-dexctl-run-15593b2b60f4 Creating
+Container bsc-uniswap-v2-v3-dexctl-run-15593b2b60f4 Created
+[2026-07-22 13:22:18.527 +0000] INFO (7): Universal Router direct V4 dynamic-fee swap passed
+    tx: "0xed412b23b9a3fa11b3c4d46e626971fb98f8d4d3784a34801fb42182036f1f47"
+    received: "993782848883945929"
+    route: "v4"
+[2026-07-22 13:22:25.680 +0000] INFO (7): Universal Router mixed V2 to V4 swap passed
+    tx: "0x20709b8967cb92acc441a11fa343d08f7db2b3d5aa6522ef240a183b74f6abba"
+    received: "9914952893663"
+    route: "v2->v4"
+[2026-07-22 13:22:32.256 +0000] INFO (7): Universal Router mixed V4 to V3 swap passed
+    tx: "0x3e210c7eb4d49d04126a6f5303db936ce754005e3b5cb74a02318a25c9fd969a"
+    received: "9802192470367"
+    route: "v4->v3"
+{
+  "ok": true,
+  "enabled": true,
+  "fullExecution": true,
+  "chainId": 97,
+  "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "router": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+  "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+  "approvals": {
+    "TOKEN_A": {
+      "erc20ApprovalTx": null,
+      "permit2ApprovalTx": "0x97c269f95a0aedd030e9d8e887b410d29ed1efb4dd8212d932c88686bf13efb1"
+    },
+    "TOKEN_B": {
+      "erc20ApprovalTx": null,
+      "permit2ApprovalTx": "0xc09806a3a4ba48ea2849e9a2719c31998dc41171359f82a7690dc6c6c1d41210"
+    }
+  },
+  "dynamicFee": {
+    "hook": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+    "poolId": "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6",
+    "before": 500,
+    "configuredForSmoke": 700,
+    "after": 700,
+    "updateTx": "0x63c648284564bbaf43b36abb97d9bf1b4461ba7aea6e7285e11748bfc0de1dac",
+    "updateBlock": 120625278
+  },
+  "tests": [
+    {
+      "protocol": "universal-router-v4-direct-dynamic-fee",
+      "route": "v4",
+      "tx": "0xed412b23b9a3fa11b3c4d46e626971fb98f8d4d3784a34801fb42182036f1f47",
+      "blockNumber": 120625294,
+      "commands": "0x10",
+      "router": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+      "quotedAmountOut": "993782848883945929",
+      "minimumAmountOut": "944093706439748632",
+      "received": "993782848883945929",
+      "swapEvent": {
+        "poolId": "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6",
+        "sender": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+        "amount0": "993782848883945929",
+        "amount1": "-1000000",
+        "sqrtPriceX96": "79668010863156030884685",
+        "liquidity": "179999999999999",
+        "tick": -276214,
+        "fee": 700
+      }
+    },
+    {
+      "protocol": "universal-router-v2-to-v4",
+      "route": "v2->v4",
+      "tx": "0x20709b8967cb92acc441a11fa343d08f7db2b3d5aa6522ef240a183b74f6abba",
+      "blockNumber": 120625309,
+      "commands": "0x0810",
+      "router": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+      "quotedAmountOut": "9914952893663",
+      "minimumAmountOut": "9419205248979",
+      "received": "9914952893663"
+    },
+    {
+      "protocol": "universal-router-v4-to-v3",
+      "route": "v4->v3",
+      "tx": "0x3e210c7eb4d49d04126a6f5303db936ce754005e3b5cb74a02318a25c9fd969a",
+      "blockNumber": 120625324,
+      "commands": "0x1000",
+      "router": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+      "quotedAmountOut": "9802192470367",
+      "minimumAmountOut": "9312082846848",
+      "received": "9802192470367"
+    }
+  ],
+  "startedAt": "2026-07-22T13:22:05.646Z",
+  "routerBalancesAfter": {
+    "TOKEN_A": "0",
+    "TOKEN_B": "0",
+    "WBNB": "0"
+  },
+  "completedAt": "2026-07-22T13:22:32.657Z",
+  "highestSmokeBlock": 120625324
+}
+[2026-07-22 13:22:32.659 +0000] INFO (7): full V4 Universal Router execution suite passed
+    router: "0x38131b4E54748D376F6F588CF13F80c3d1b6A711"
+    tests: 3
+    dynamicFee: 700
+=== CREATE FRESH POSTGRESQL INDEX IN STAGES ===
+=== RESET ONLY RUNTIME AND POSTGRESQL ===
+[+] down 1/1
+ ✔ Network bsc-uniswap-v2-v3_default Removed                                                                                                     0.3s
+
+=== START FRESH POSTGRESQL ===
+[+] up 3/3
+ ✔ Network bsc-uniswap-v2-v3_default      Created                                                                                                0.0s
+ ✔ Volume bsc-uniswap-v2-v3_postgres_data Created                                                                                                0.0s
+ ✔ Container bsc-uniswap-v2-v3-postgres-1 Started                                                                                                0.3s
+postgres=starting
+postgres=starting
+postgres=starting
+postgres=healthy
+
+=== START INDEXER ALONE ===
+[+] up 1/1
+ ✔ Container bsc-uniswap-v2-v3-v2-v3-indexer-1 Started                                                                                           0.3s
+indexer=starting cursor=120624283 initial=120624283
+indexer=starting cursor=120624283 initial=120624283
+indexer=starting cursor=120624283 initial=120624283
+indexer=healthy cursor=120625351 initial=120624283
+PASS: indexer committed its first batch
+
+=== START ROUTE API AND WAIT FOR INDEXER CATCH-UP ===
+[+] up 1/1
+ ✔ Container bsc-uniswap-v2-v3-route-api-1 Started                                                                                               0.3s
+route API waiting for indexer
+cursor=120625351 lag=108 route-ok=true
+PASS: indexer is caught up and route API is operational
+
+=== START MONITOR ===
+[+] up 1/1
+ ✔ Container bsc-uniswap-v2-v3-dex-monitor-1 Started                                                                                             0.3s
+monitor starting
+monitor-ok=true
+PASS: PostgreSQL, indexer, route API and monitor are operational
+
+=== PRE-CLEANUP RUNTIME HEALTH ===
+{
+  "ok": true,
+  "checkedAt": "2026-07-22T13:23:33.550Z",
+  "chainId": 97,
+  "deploymentStatus": "v2_v3_full_v4_universal_router_smoke_passed_pending_runtime_index_and_cleanup",
+  "contracts": {
+    "v2Factory": "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC",
+    "v3Factory": "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44",
+    "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+    "universalRouter": "0x4527Df451c24d7d073166518c7a5601Cd722d8B7",
+    "v4PoolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+    "v4Quoter": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+    "v4PositionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+    "universalRouterV4": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+    "v4DynamicFeeHook": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080"
+  },
+  "rpc": [
+    {
+      "url": "https://bsc-testnet-dataseed.bnbchain.org",
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625468,
+      "latencyMs": 548
+    },
+    {
+      "url": "https://bsc-testnet.bnbchain.org",
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625468,
+      "latencyMs": 521
+    },
+    {
+      "url": "https://bsc-prebsc-dataseed.bnbchain.org",
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625468,
+      "latencyMs": 944
+    }
+  ],
+  "database": {
+    "ok": true
+  },
+  "indexer": {
+    "last_block": "120625351",
+    "last_hash": "0x5facd2af61a2b46ff8c0501868acdf8e1c3e355f413c74f78745eb7e0ad89c7a",
+    "updated_at": "2026-07-22T13:22:41.692Z"
+  },
+  "latestBlock": 120625468,
+  "indexerLagBlocks": 117,
+  "maxIndexerLagBlocks": 250,
+  "routeApi": {
+    "ok": true,
+    "status": 200,
+    "body": {
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625470,
+      "rpcEndpoints": 3,
+      "indexer": {
+        "last_block": "120625351",
+        "last_hash": "0x5facd2af61a2b46ff8c0501868acdf8e1c3e355f413c74f78745eb7e0ad89c7a",
+        "updated_at": "2026-07-22T13:22:41.692Z"
+      },
+      "indexerLagBlocks": 119,
+      "databaseTime": "2026-07-22T13:23:33.420Z",
+      "deploymentStatus": "v2_v3_full_v4_universal_router_smoke_passed_pending_runtime_index_and_cleanup",
+      "contracts": {
+        "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+        "universalRouter": "0x4527Df451c24d7d073166518c7a5601Cd722d8B7",
+        "v4PoolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+        "v4Quoter": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+        "v4PositionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+        "universalRouterV4": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+        "v4DynamicFeeHook": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080"
+      }
+    }
+  }
+}
+
+=== PRE-CLEANUP INDEXED COUNTS ===
+   dataset    | count
+--------------+-------
+ v2_pairs     |     2
+ v3_pools     |     2
+ v4_pools     |     2
+ v4_hooks     |     1
+ v4_positions |     2
+ positions    |     2
+ events       |    51
+(7 rows)
+
+
+=== LIVE V2/V3/V4 ROUTE QUOTE PROOF ===
+{
+  "chainId": 97,
+  "tokenIn": {
+    "configuredSymbol": "TOKEN_A",
+    "symbol": "tUSDC",
+    "name": "Test USD Coin",
+    "decimals": 6,
+    "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+  },
+  "tokenOut": {
+    "configuredSymbol": "TOKEN_B",
+    "symbol": "tDEX",
+    "name": "Test DEX Token",
+    "decimals": 18,
+    "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+  },
+  "amountIn": "1000000",
+  "best": {
+    "kind": "v3",
+    "bridge": null,
+    "executable": true,
+    "executionMode": "universal-router-v1.6",
+    "amountOut": "999023947995990695",
+    "steps": [
+      {
+        "protocol": "v3",
+        "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+        "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+        "pair": null,
+        "poolId": null,
+        "tickSpacing": null,
+        "hooks": null,
+        "hookData": "0x",
+        "hook": null,
+        "fee": 500,
+        "amountIn": "1000000",
+        "amountOut": "999023947995990695",
+        "gasEstimate": "80736",
+        "initializedTicksCrossed": "0"
+      }
+    ]
+  },
+  "routes": [
+    {
+      "kind": "v3",
+      "bridge": null,
+      "executable": true,
+      "executionMode": "universal-router-v1.6",
+      "amountOut": "999023947995990695",
+      "steps": [
+        {
+          "protocol": "v3",
+          "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+          "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+          "pair": null,
+          "poolId": null,
+          "tickSpacing": null,
+          "hooks": null,
+          "hookData": "0x",
+          "hook": null,
+          "fee": 500,
+          "amountIn": "1000000",
+          "amountOut": "999023947995990695",
+          "gasEstimate": "80736",
+          "initializedTicksCrossed": "0"
+        }
+      ]
+    },
+    {
+      "kind": "v2",
+      "bridge": null,
+      "executable": true,
+      "executionMode": "universal-router-v1.6",
+      "amountOut": "994027854638319057",
+      "steps": [
+        {
+          "protocol": "v2",
+          "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+          "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+          "pair": "0x9dEebd9eEFf4B1Ac8382fB564Fb985bF1dF5DeEE",
+          "poolId": null,
+          "tickSpacing": null,
+          "hooks": null,
+          "hookData": "0x",
+          "hook": null,
+          "fee": null,
+          "amountIn": "1000000",
+          "amountOut": "994027854638319057",
+          "gasEstimate": null,
+          "initializedTicksCrossed": null
+        }
+      ]
+    },
+    {
+      "kind": "v2->v3",
+      "bridge": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "executable": true,
+      "executionMode": "universal-router-v1.6",
+      "amountOut": "990735183186235952",
+      "steps": [
+        {
+          "protocol": "v2",
+          "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+          "tokenOut": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+          "pair": "0x1729F84d75685609127614132C6E6D53b888e0a7",
+          "poolId": null,
+          "tickSpacing": null,
+          "hooks": null,
+          "hookData": "0x",
+          "hook": null,
+          "fee": null,
+          "amountIn": "1000000",
+          "amountOut": "9940219192671",
+          "gasEstimate": null,
+          "initializedTicksCrossed": null
+        },
+        {
+          "protocol": "v3",
+          "tokenIn": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+          "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+          "pair": null,
+          "poolId": null,
+          "tickSpacing": null,
+          "hooks": null,
+          "hookData": "0x",
+          "hook": null,
+          "fee": 3000,
+          "amountIn": "9940219192671",
+          "amountOut": "990735183186235952",
+          "gasEstimate": "79713",
+          "initializedTicksCrossed": "0"
+        }
+      ]
+    },
+    {
+      "kind": "v4->v3",
+      "bridge": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "executable": true,
+      "executionMode": "universal-router-v4",
+      "amountOut": "977406358912084299",
+      "steps": [
+        {
+          "protocol": "v4",
+          "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+          "tokenOut": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+          "pair": null,
+          "poolId": "0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486",
+          "tickSpacing": 60,
+          "hooks": "0x0000000000000000000000000000000000000000",
+          "hookData": "0x",
+          "hook": {
+            "mode": "none",
+            "address": "0x0000000000000000000000000000000000000000",
+            "dynamicFee": false,
+            "initialFee": 3000,
+            "permissionMask": 0,
+            "hookData": "0x",
+            "codeHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "fee": 3000,
+          "amountIn": "1000000",
+          "amountOut": "9806449220572",
+          "gasEstimate": "37019",
+          "initializedTicksCrossed": null
+        },
+        {
+          "protocol": "v3",
+          "tokenIn": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+          "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+          "pair": null,
+          "poolId": null,
+          "tickSpacing": null,
+          "hooks": null,
+          "hookData": "0x",
+          "hook": null,
+          "fee": 3000,
+          "amountIn": "9806449220572",
+          "amountOut": "977406358912084299",
+          "gasEstimate": "80667",
+          "initializedTicksCrossed": "0"
+        }
+      ]
+    },
+    {
+      "kind": "v4",
+      "bridge": null,
+      "executable": true,
+      "executionMode": "universal-router-v4",
+      "amountOut": "972135369253637441",
+      "steps": [
+        {
+          "protocol": "v4",
+          "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+          "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+          "pair": null,
+          "poolId": "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6",
+          "tickSpacing": 10,
+          "hooks": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+          "hookData": "0x",
+          "hook": {
+            "mode": "bundled_dynamic_fee",
+            "address": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+            "dynamicFee": true,
+            "initialFee": 500,
+            "permissionMask": 128,
+            "hookData": "0x",
+            "codeHash": "0x483d05b3953229a68cdc724104b553825eff42f8b7490a0583d485907a8bb9d2"
+          },
+          "fee": 8388608,
+          "amountIn": "1000000",
+          "amountOut": "972135369253637441",
+          "gasEstimate": "43745",
+          "initializedTicksCrossed": null
+        }
+      ]
+    }
+  ]
+}
+
+=== EXECUTABLE V4 ROUTE BUILD PROOF ===
+{
+  "chainId": 97,
+  "tokenIn": {
+    "configuredSymbol": "TOKEN_A",
+    "symbol": "tUSDC",
+    "name": "Test USD Coin",
+    "decimals": 6,
+    "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+  },
+  "tokenOut": {
+    "configuredSymbol": "TOKEN_B",
+    "symbol": "tDEX",
+    "name": "Test DEX Token",
+    "decimals": 18,
+    "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+  },
+  "amountIn": "1000000",
+  "route": {
+    "kind": "v4",
+    "bridge": null,
+    "executable": true,
+    "executionMode": "universal-router-v4",
+    "amountOut": "972135369253637441",
+    "steps": [
+      {
+        "protocol": "v4",
+        "tokenIn": "0x813fB80c189A5AD48f537706c266F375820AB551",
+        "tokenOut": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+        "pair": null,
+        "poolId": "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6",
+        "tickSpacing": 10,
+        "hooks": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+        "hookData": "0x",
+        "hook": {
+          "mode": "bundled_dynamic_fee",
+          "address": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+          "dynamicFee": true,
+          "initialFee": 500,
+          "permissionMask": 128,
+          "hookData": "0x",
+          "codeHash": "0x483d05b3953229a68cdc724104b553825eff42f8b7490a0583d485907a8bb9d2"
+        },
+        "fee": 8388608,
+        "amountIn": "1000000",
+        "amountOut": "972135369253637441",
+        "gasEstimate": "43745",
+        "initializedTicksCrossed": null
+      }
+    ]
+  },
+  "transaction": {
+    "to": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+    "data": "0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000006a60c6b100000000000000000000000000000000000000000000000000000000000000011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000360000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000003060c0e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000001e000000000000000000000000000000000000000000000000000000000000002400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000002000000000000000000000000061c01d869d84a55e0e94a419304fdf2babbd9faa000000000000000000000000813fb80c189a5ad48f537706c266f375820ab5510000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000cc949f126ec57507bdb6c8e42e565fc13f9dc080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f42400000000000000000000000000000000000000000000000000cd1085e8e0ef630000000000000000000000000000000000000000000000000000000000000012000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000813fb80c189a5ad48f537706c266f375820ab55100000000000000000000000000000000000000000000000000000000000f4240000000000000000000000000000000000000000000000000000000000000006000000000000000000000000061c01d869d84a55e0e94a419304fdf2babbd9faa0000000000000000000000004ac05c9075568602be526ae4eeb3be0b5fcd53420000000000000000000000000000000000000000000000000000000000000000",
+    "value": "0",
+    "commands": "0x10",
+    "inputs": [
+      "0x000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000003060c0e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000001e000000000000000000000000000000000000000000000000000000000000002400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000002000000000000000000000000061c01d869d84a55e0e94a419304fdf2babbd9faa000000000000000000000000813fb80c189a5ad48f537706c266f375820ab5510000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000cc949f126ec57507bdb6c8e42e565fc13f9dc080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f42400000000000000000000000000000000000000000000000000cd1085e8e0ef630000000000000000000000000000000000000000000000000000000000000012000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000813fb80c189a5ad48f537706c266f375820ab55100000000000000000000000000000000000000000000000000000000000f4240000000000000000000000000000000000000000000000000000000000000006000000000000000000000000061c01d869d84a55e0e94a419304fdf2babbd9faa0000000000000000000000004ac05c9075568602be526ae4eeb3be0b5fcd53420000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "deadline": 1784727217,
+    "minimumAmountOut": "923528600790955568",
+    "executionMode": "universal-router-v4"
+  },
+  "approvals": {
+    "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+    "token": "0x813fB80c189A5AD48f537706c266F375820AB551",
+    "erc20ToPermit2": {
+      "spender": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+      "allowance": "115792089237316195423570985008687907853269984665640564039457584007913129639935",
+      "required": "1000000",
+      "needed": false
+    },
+    "permit2ToRouter": {
+      "spender": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+      "allowance": "1461501637330902918203684832716283019655932542975",
+      "expiration": 1787318513,
+      "required": "1000000",
+      "needed": false
+    }
+  }
+}
+
+=== REMOVE ALL CONFIGURED V4 LIQUIDITY ===
+Container bsc-uniswap-v2-v3-dexctl-run-599d37071062 Creating
+Container bsc-uniswap-v2-v3-dexctl-run-599d37071062 Created
+[2026-07-22 13:23:47.003 +0000] INFO (7): V4 PositionManager NFT burned and pool liquidity removed
+    poolId: "0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486"
+    tokenId: "1"
+    tx: "0x46230fd230dde8b066f917595ae4b88daa7fefe84c07bc8b9feadeab87089247"
+[2026-07-22 13:23:53.309 +0000] INFO (7): V4 PositionManager NFT burned and pool liquidity removed
+    poolId: "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6"
+    tokenId: "2"
+    tx: "0x2631b0146ceb97a7541d93735d0159b459106a3611c78260bcd2650d2dfd5874"
+{
+  "ok": true,
+  "enabled": true,
+  "fullExecution": true,
+  "chainId": 97,
+  "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "positionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+  "startedAt": "2026-07-22T13:23:39.962Z",
+  "pools": [
+    {
+      "poolId": "0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486",
+      "key": {
+        "currency0": "0x813fB80c189A5AD48f537706c266F375820AB551",
+        "currency1": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+        "fee": 3000,
+        "tickSpacing": 60,
+        "hooks": "0x0000000000000000000000000000000000000000"
+      },
+      "hook": {
+        "mode": "none",
+        "address": "0x0000000000000000000000000000000000000000",
+        "dynamicFee": false,
+        "initialFee": 3000,
+        "permissionMask": 0,
+        "hookData": "0x",
+        "codeHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "positionTokenId": "1",
+      "mintedLiquidity": "569209978829",
+      "liquidityBefore": "569209978829",
+      "liquidityAfter": "0",
+      "received0": "180999985",
+      "received1": "1790085047102199",
+      "burnTx": "0x46230fd230dde8b066f917595ae4b88daa7fefe84c07bc8b9feadeab87089247",
+      "burnBlock": 120625489,
+      "nftBurned": true
+    },
+    {
+      "poolId": "0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6",
+      "key": {
+        "currency0": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+        "currency1": "0x813fB80c189A5AD48f537706c266F375820AB551",
+        "fee": 8388608,
+        "tickSpacing": 10,
+        "hooks": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080"
+      },
+      "hook": {
+        "mode": "bundled_dynamic_fee",
+        "address": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+        "dynamicFee": true,
+        "initialFee": 500,
+        "permissionMask": 128,
+        "hookData": "0x",
+        "codeHash": "0x483d05b3953229a68cdc724104b553825eff42f8b7490a0583d485907a8bb9d2"
+      },
+      "positionTokenId": "2",
+      "mintedLiquidity": "179999999999999",
+      "liquidityBefore": "179999999999999",
+      "liquidityAfter": "0",
+      "received0": "178023347432341886274",
+      "received1": "181999998",
+      "burnTx": "0x2631b0146ceb97a7541d93735d0159b459106a3611c78260bcd2650d2dfd5874",
+      "burnBlock": 120625503,
+      "nftBurned": true
+    }
+  ],
+  "wrappedNative": {
+    "balanceBeforeBlock": 120625483,
+    "balanceBefore": "219717145368166",
+    "balanceAfterRemovalBlock": 120625514,
+    "balanceAfterRemoval": "2009802192470365",
+    "reclaimed": "1790085047102199",
+    "unwrapTx": "0x2233c253879a07a890114608ec0fc44a949bbe838fd9e45ac7877494bdd676f0",
+    "unwrapBlock": 120625517,
+    "finalBlock": 120625528,
+    "finalBalance": "219717145368166"
+  },
+  "allConfiguredLiquidityRemoved": true,
+  "allPositionNftsBurned": true,
+  "highestCleanupBlock": 120625517,
+  "completedAt": "2026-07-22T13:23:59.845Z"
+}
+
+=== REMOVE ALL DEPLOYER-OWNED V2/V3 LIQUIDITY ===
+Container bsc-uniswap-v2-v3-dexctl-run-3667b7febfde Creating
+Container bsc-uniswap-v2-v3-dexctl-run-3667b7febfde Created
+[2026-07-22 13:24:16.838 +0000] INFO (7): all deployer-owned V2 liquidity removed
+    pair: "0x1729F84d75685609127614132C6E6D53b888e0a7"
+    tx: "0x01f5014c2d4079a2fe9253ab3318207d1a69885413e6a7e7f632d64cc2848cb4"
+[2026-07-22 13:24:29.740 +0000] INFO (7): all deployer-owned V2 liquidity removed
+    pair: "0x9dEebd9eEFf4B1Ac8382fB564Fb985bF1dF5DeEE"
+    tx: "0x08e31d5ac571c50b6242356eec5b0454d4c032956ada4d8d116239fd180fbe55"
+[2026-07-22 13:24:49.008 +0000] INFO (7): all V3 liquidity removed and NFT burned
+    pool: "0x5A4d111F39D61Ef67E30c0c7319561cD0c13D385"
+    tokenId: "1"
+    burnTx: "0x15807585e6a6180f4768794d83f437629cd4b31e021de776fd3052e3683172bb"
+[2026-07-22 13:25:08.274 +0000] INFO (7): all V3 liquidity removed and NFT burned
+    pool: "0xA5B245f78D4EecC7A00c6D79F405ac6D3eF45Df3"
+    tokenId: "2"
+    burnTx: "0xb797d16d7b390d625fbc86b2c1d8bdecad5a53ad0d2b6794353bf49bbe8c444b"
+{
+  "ok": true,
+  "completedAt": "2026-07-22T13:25:14.523Z",
+  "chainId": 97,
+  "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "allDeployerOwnedLiquidityRemoved": true,
+  "v2MinimumLiquidityNotice": "Each Uniswap V2 pair permanently retains protocol-mandated minimum liquidity; all deployer-owned LP tokens were removed.",
+  "v2": [
+    {
+      "pair": "0x1729F84d75685609127614132C6E6D53b888e0a7",
+      "tokenA": {
+        "configuredSymbol": "WBNB",
+        "symbol": "WBNB",
+        "name": "Wrapped BNB",
+        "decimals": 18,
+        "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+      },
+      "tokenB": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "approvalTx": "0x198e5a19bd934db4d9873b474e15418d2e02899e13b4282b85be8c5a086d51a2",
+      "removeTx": "0x01f5014c2d4079a2fe9253ab3318207d1a69885413e6a7e7f632d64cc2848cb4",
+      "removeBlock": 120625560,
+      "ownerLpBefore": "3162277659168",
+      "ownerLpAfter": "0",
+      "receivedA": "9990039927030472",
+      "receivedB": "1000999999",
+      "totalSupplyBefore": "3162277660168",
+      "remainingLockedLiquidity": "1000",
+      "reservesBefore": {
+        "reserve0": "1001000000",
+        "reserve1": "9990039930189601"
+      },
+      "reservesAfter": {
+        "reserve0": "1",
+        "reserve1": "3159129"
+      }
+    },
+    {
+      "pair": "0x9dEebd9eEFf4B1Ac8382fB564Fb985bF1dF5DeEE",
+      "tokenA": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "tokenB": {
+        "configuredSymbol": "TOKEN_B",
+        "symbol": "tDEX",
+        "name": "Test DEX Token",
+        "decimals": 18,
+        "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+      },
+      "approvalTx": "0xa1aa92487bc79c62a05549ddfa1d405dbad1a5cd2bb93f1240d1d8a23a970ef4",
+      "removeTx": "0x08e31d5ac571c50b6242356eec5b0454d4c032956ada4d8d116239fd180fbe55",
+      "removeBlock": 120625584,
+      "ownerLpBefore": "999999999999000",
+      "ownerLpAfter": "0",
+      "receivedA": "1001000012",
+      "receivedB": "999009971098693960048",
+      "totalSupplyBefore": "1000000000000000",
+      "remainingLockedLiquidity": "1000",
+      "reservesBefore": {
+        "reserve0": "999009971099692970020",
+        "reserve1": "1001000013"
+      },
+      "reservesAfter": {
+        "reserve0": "999009972",
+        "reserve1": "1"
+      }
+    }
+  ],
+  "v3": [
+    {
+      "pool": "0x5A4d111F39D61Ef67E30c0c7319561cD0c13D385",
+      "tokenId": "1",
+      "token0": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+      "token1": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "liquidityRemoved": "10454324557979861576",
+      "decreaseTx": "0x929112ffb3ee9aba0e80720f35aa75ab048d86986498390298e50d61d93e12fa",
+      "decreaseBlock": 120625599,
+      "collectTx": "0xe86da615d87e10ed201f8b166117e4af9e6f56d05c531dfa063ebfad234e9b66",
+      "collectBlock": 120625613,
+      "burnTx": "0x15807585e6a6180f4768794d83f437629cd4b31e021de776fd3052e3683172bb",
+      "burnBlock": 120625632,
+      "nftBurned": true,
+      "received0": "998839485966628070605",
+      "received1": "10000157877340030",
+      "poolLiquidityBefore": "10454324557979861576",
+      "poolLiquidityAfter": "0"
+    },
+    {
+      "pool": "0xA5B245f78D4EecC7A00c6D79F405ac6D3eF45Df3",
+      "tokenId": "2",
+      "token0": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+      "token1": "0x813fB80c189A5AD48f537706c266F375820AB551",
+      "liquidityRemoved": "10488755534157289",
+      "decreaseTx": "0x33e743e360bdc163e9000e11e603a5d81eb788c2891d989a690972c8aa34f55c",
+      "decreaseBlock": 120625642,
+      "collectTx": "0x0f55b0b334638b7c24c0d4bff35b47c45ccf7ffdedf10137b44d204e280872ab",
+      "collectBlock": 120625655,
+      "burnTx": "0xb797d16d7b390d625fbc86b2c1d8bdecad5a53ad0d2b6794353bf49bbe8c444b",
+      "burnBlock": 120625669,
+      "nftBurned": true,
+      "received0": "998001380906920077299",
+      "received1": "998178330",
+      "poolLiquidityBefore": "10488755534157289",
+      "poolLiquidityAfter": "0"
+    }
+  ],
+  "wrappedNative": {
+    "balanceBeforeBlock": 120625535,
+    "balanceBefore": "219717145368166",
+    "balanceAfterRemovalBlock": 120625669,
+    "balanceAfterRemoval": "20209914949738668",
+    "reclaimed": "19990197804370502",
+    "unwrapped": {
+      "amount": "19990197804370502",
+      "tx": "0xad335250057dbdc40965db591e61a6f2871fea4691953f8e8e2399d59da93720",
+      "blockNumber": 120625684
+    },
+    "finalBalanceBlock": 120625684,
+    "finalBalance": "219717145368166"
+  },
+  "highestCleanupBlock": 120625684
+}
+
+=== WAIT FOR CLEANUP EVENTS TO BE INDEXED ===
+cleanup-cursor=120625544 required=120625684
+cleanup-cursor=120625544 required=120625684
+cleanup-cursor=120625544 required=120625684
+cleanup-cursor=120625544 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625640 required=120625684
+cleanup-cursor=120625735 required=120625684
+
+=== VERIFY FINAL ON-CHAIN CLEANUP ===
+{
+  "ok": true,
+  "completedAt": "2026-07-22T13:25:14.523Z",
+  "chainId": 97,
+  "owner": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "allDeployerOwnedLiquidityRemoved": true,
+  "v2MinimumLiquidityNotice": "Each Uniswap V2 pair permanently retains protocol-mandated minimum liquidity; all deployer-owned LP tokens were removed.",
+  "v2": [
+    {
+      "pair": "0x1729F84d75685609127614132C6E6D53b888e0a7",
+      "tokenA": {
+        "configuredSymbol": "WBNB",
+        "symbol": "WBNB",
+        "name": "Wrapped BNB",
+        "decimals": 18,
+        "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+      },
+      "tokenB": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "approvalTx": "0x198e5a19bd934db4d9873b474e15418d2e02899e13b4282b85be8c5a086d51a2",
+      "removeTx": "0x01f5014c2d4079a2fe9253ab3318207d1a69885413e6a7e7f632d64cc2848cb4",
+      "removeBlock": 120625560,
+      "ownerLpBefore": "3162277659168",
+      "ownerLpAfter": "0",
+      "receivedA": "9990039927030472",
+      "receivedB": "1000999999",
+      "totalSupplyBefore": "3162277660168",
+      "remainingLockedLiquidity": "1000",
+      "reservesBefore": {
+        "reserve0": "1001000000",
+        "reserve1": "9990039930189601"
+      },
+      "reservesAfter": {
+        "reserve0": "1",
+        "reserve1": "3159129"
+      }
+    },
+    {
+      "pair": "0x9dEebd9eEFf4B1Ac8382fB564Fb985bF1dF5DeEE",
+      "tokenA": {
+        "configuredSymbol": "TOKEN_A",
+        "symbol": "tUSDC",
+        "name": "Test USD Coin",
+        "decimals": 6,
+        "address": "0x813fB80c189A5AD48f537706c266F375820AB551"
+      },
+      "tokenB": {
+        "configuredSymbol": "TOKEN_B",
+        "symbol": "tDEX",
+        "name": "Test DEX Token",
+        "decimals": 18,
+        "address": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA"
+      },
+      "approvalTx": "0xa1aa92487bc79c62a05549ddfa1d405dbad1a5cd2bb93f1240d1d8a23a970ef4",
+      "removeTx": "0x08e31d5ac571c50b6242356eec5b0454d4c032956ada4d8d116239fd180fbe55",
+      "removeBlock": 120625584,
+      "ownerLpBefore": "999999999999000",
+      "ownerLpAfter": "0",
+      "receivedA": "1001000012",
+      "receivedB": "999009971098693960048",
+      "totalSupplyBefore": "1000000000000000",
+      "remainingLockedLiquidity": "1000",
+      "reservesBefore": {
+        "reserve0": "999009971099692970020",
+        "reserve1": "1001000013"
+      },
+      "reservesAfter": {
+        "reserve0": "999009972",
+        "reserve1": "1"
+      }
+    }
+  ],
+  "v3": [
+    {
+      "pool": "0x5A4d111F39D61Ef67E30c0c7319561cD0c13D385",
+      "tokenId": "1",
+      "token0": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+      "token1": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "liquidityRemoved": "10454324557979861576",
+      "decreaseTx": "0x929112ffb3ee9aba0e80720f35aa75ab048d86986498390298e50d61d93e12fa",
+      "decreaseBlock": 120625599,
+      "collectTx": "0xe86da615d87e10ed201f8b166117e4af9e6f56d05c531dfa063ebfad234e9b66",
+      "collectBlock": 120625613,
+      "burnTx": "0x15807585e6a6180f4768794d83f437629cd4b31e021de776fd3052e3683172bb",
+      "burnBlock": 120625632,
+      "nftBurned": true,
+      "received0": "998839485966628070605",
+      "received1": "10000157877340030",
+      "poolLiquidityBefore": "10454324557979861576",
+      "poolLiquidityAfter": "0"
+    },
+    {
+      "pool": "0xA5B245f78D4EecC7A00c6D79F405ac6D3eF45Df3",
+      "tokenId": "2",
+      "token0": "0x61C01d869D84a55E0e94A419304Fdf2BabbD9fAA",
+      "token1": "0x813fB80c189A5AD48f537706c266F375820AB551",
+      "liquidityRemoved": "10488755534157289",
+      "decreaseTx": "0x33e743e360bdc163e9000e11e603a5d81eb788c2891d989a690972c8aa34f55c",
+      "decreaseBlock": 120625642,
+      "collectTx": "0x0f55b0b334638b7c24c0d4bff35b47c45ccf7ffdedf10137b44d204e280872ab",
+      "collectBlock": 120625655,
+      "burnTx": "0xb797d16d7b390d625fbc86b2c1d8bdecad5a53ad0d2b6794353bf49bbe8c444b",
+      "burnBlock": 120625669,
+      "nftBurned": true,
+      "received0": "998001380906920077299",
+      "received1": "998178330",
+      "poolLiquidityBefore": "10488755534157289",
+      "poolLiquidityAfter": "0"
+    }
+  ],
+  "wrappedNative": {
+    "balanceBeforeBlock": 120625535,
+    "balanceBefore": "219717145368166",
+    "balanceAfterRemovalBlock": 120625669,
+    "balanceAfterRemoval": "20209914949738668",
+    "reclaimed": "19990197804370502",
+    "unwrapped": {
+      "amount": "19990197804370502",
+      "tx": "0xad335250057dbdc40965db591e61a6f2871fea4691953f8e8e2399d59da93720",
+      "blockNumber": 120625684
+    },
+    "finalBalanceBlock": 120625684,
+    "finalBalance": "219717145368166"
+  },
+  "highestCleanupBlock": 120625684
+}
+
+=== VERIFY FINAL INDEXED STATE ===
+                    pair                    | reserve0  | reserve1 | updated_block
+--------------------------------------------+-----------+----------+---------------
+ 0x1729f84d75685609127614132c6e6d53b888e0a7 |         1 |  3159129 |     120625560
+ 0x9deebd9eeff4b1ac8382fb564fb985bf1df5deee | 999009972 |        1 |     120625584
+(2 rows)
+
+                    pool                    | liquidity | updated_block
+--------------------------------------------+-----------+---------------
+ 0x5a4d111f39d61ef67e30c0c7319561cd0c13d385 |         0 |     120625599
+ 0xa5b245f78d4eecc7a00c6d79f405ac6d3ef45df3 |         0 |     120625642
+(2 rows)
+
+                              pool_id                               |   fee   | dynamic_fee | last_swap_fee |                   hooks
+    | liquidity | updated_block
+--------------------------------------------------------------------+---------+-------------+---------------+--------------------------------------------+-----------+---------------
+ 0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6 | 8388608 | t           |           700 | 0xcc949f126ec57507bdb6c8e42e565fc13f9dc080 |         0 |     120625503
+ 0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486 |    3000 | f           |          3000 | 0x0000000000000000000000000000000000000000 |         0 |     120625489
+(2 rows)
+
+                    hook                    | current_fee | permission_mask | updated_block
+--------------------------------------------+-------------+-----------------+---------------
+ 0xcc949f126ec57507bdb6c8e42e565fc13f9dc080 |         700 |             128 |     120625278
+(1 row)
+
+ token_id |                   owner                    |                              pool_id                               | updated_block
+----------+--------------------------------------------+--------------------------------------------------------------------+---------------
+        1 | 0x0000000000000000000000000000000000000000 | 0x98935618719e957ded1557b70afdc382e312eae6f50fd530793da9809c1c1486 |     120625489
+        2 | 0x0000000000000000000000000000000000000000 | 0x5054b1ec9dc50007c5a60fe212da5f8aacceaa91c3bd76b3aeb40e2dfa944ea6 |     120625503
+(2 rows)
+
+ token_id |                   owner                    | updated_block
+----------+--------------------------------------------+---------------
+        1 | 0x0000000000000000000000000000000000000000 |     120625632
+        2 | 0x0000000000000000000000000000000000000000 |     120625669
+(2 rows)
+
+
+=== FINAL HEALTH AND STATUS ===
+{
+  "ok": true,
+  "checkedAt": "2026-07-22T13:26:18.713Z",
+  "chainId": 97,
+  "deploymentStatus": "v2_v3_full_v4_universal_router_smoke_passed_pending_runtime_index_and_cleanup",
+  "contracts": {
+    "v2Factory": "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC",
+    "v3Factory": "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44",
+    "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+    "universalRouter": "0x4527Df451c24d7d073166518c7a5601Cd722d8B7",
+    "v4PoolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+    "v4Quoter": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+    "v4PositionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+    "universalRouterV4": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+    "v4DynamicFeeHook": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080"
+  },
+  "rpc": [
+    {
+      "url": "https://bsc-testnet-dataseed.bnbchain.org",
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625834,
+      "latencyMs": 386
+    },
+    {
+      "url": "https://bsc-testnet.bnbchain.org",
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625835,
+      "latencyMs": 542
+    },
+    {
+      "url": "https://bsc-prebsc-dataseed.bnbchain.org",
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625834,
+      "latencyMs": 886
+    }
+  ],
+  "database": {
+    "ok": true
+  },
+  "indexer": {
+    "last_block": "120625735",
+    "last_hash": "0x8a4b4c8b0d0a5f6ca292f18674d64a234dba129d3c074ed0bb7591c108c28969",
+    "updated_at": "2026-07-22T13:25:34.350Z"
+  },
+  "latestBlock": 120625835,
+  "indexerLagBlocks": 100,
+  "maxIndexerLagBlocks": 250,
+  "routeApi": {
+    "ok": true,
+    "status": 200,
+    "body": {
+      "ok": true,
+      "chainId": 97,
+      "blockNumber": 120625837,
+      "rpcEndpoints": 3,
+      "indexer": {
+        "last_block": "120625735",
+        "last_hash": "0x8a4b4c8b0d0a5f6ca292f18674d64a234dba129d3c074ed0bb7591c108c28969",
+        "updated_at": "2026-07-22T13:25:34.350Z"
+      },
+      "indexerLagBlocks": 102,
+      "databaseTime": "2026-07-22T13:26:18.190Z",
+      "deploymentStatus": "v2_v3_full_v4_universal_router_smoke_passed_pending_runtime_index_and_cleanup",
+      "contracts": {
+        "permit2": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+        "universalRouter": "0x4527Df451c24d7d073166518c7a5601Cd722d8B7",
+        "v4PoolManager": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+        "v4Quoter": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+        "v4PositionManager": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+        "universalRouterV4": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+        "v4DynamicFeeHook": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080"
+      }
+    }
+  }
+}
+Container bsc-uniswap-v2-v3-dexctl-run-4f8fdd937718 Creating
+Container bsc-uniswap-v2-v3-dexctl-run-4f8fdd937718 Created
+{
+  "deployed": true,
+  "deploymentStatus": "phase_one_tested_indexed_liquidity_removed",
+  "network": {
+    "id": "bsc-testnet",
+    "name": "BNB Smart Chain Testnet",
+    "chainId": 97,
+    "nativeCurrency": {
+      "name": "Test BNB",
+      "symbol": "tBNB",
+      "decimals": 18
+    }
+  },
+  "deployer": "0x4AC05c9075568602be526AE4eEb3be0b5Fcd5342",
+  "contracts": {
+    "wrappedNative": {
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "hasCode": true
+    },
+    "v2Factory": {
+      "address": "0xe6e3521EB7836DF86AD35d27ea907eB727dB7acC",
+      "hasCode": true
+    },
+    "v2Router02": {
+      "address": "0x7408FF2F02A699281cC42E96990D8fb04945f04f",
+      "hasCode": true
+    },
+    "v3Factory": {
+      "address": "0x2B67BA64476F9bbAaE766cF8869F0c718877aD44",
+      "hasCode": true
+    },
+    "multicall2": {
+      "address": "0xFB153b3F4260AeA7a3831FC80c54bEAFaCF0A736",
+      "hasCode": true
+    },
+    "proxyAdmin": {
+      "address": "0xd00F9aE1d61B06deC9Ef12B6fC9185255dDC9d59",
+      "hasCode": true
+    },
+    "tickLens": {
+      "address": "0xDa4C8786b481557aA04c9981aF901379A91BBE32",
+      "hasCode": true
+    },
+    "nftDescriptorLibrary": {
+      "address": "0x1672aa092B299D85011FFcCdfdc7434055F9ea26",
+      "hasCode": true
+    },
+    "positionDescriptorImplementation": {
+      "address": "0xa533519189E20D7dE16EE202066a0793DeB7aE09",
+      "hasCode": true
+    },
+    "positionDescriptorProxy": {
+      "address": "0x66100dB4dC2F7b55B67D4a937B17744D5AEe9C4A",
+      "hasCode": true
+    },
+    "positionManager": {
+      "address": "0xdCa665F889909E60F042512bE6Ea63dA5E19271E",
+      "hasCode": true
+    },
+    "v3Migrator": {
+      "address": "0x74e18Ef0c9C4038efa2A99a2c042C97FB64606f7",
+      "hasCode": true
+    },
+    "v3Staker": {
+      "address": "0x267dAbb20aD82ab4f812F127f957Eb522753f543",
+      "hasCode": true
+    },
+    "quoterV2": {
+      "address": "0xd384490F929977a8b9aF4d73Cd92e23e38C90401",
+      "hasCode": true
+    },
+    "swapRouter02": {
+      "address": "0x0A77a4F3bE72D863d74919c40fACdf47b2944223",
+      "hasCode": true
+    },
+    "permit2": {
+      "address": "0xAEAdcEB97501Cd0d3a9149914Dc9B0d4491Fd694",
+      "hasCode": true
+    },
+    "universalRouter": {
+      "address": "0x4527Df451c24d7d073166518c7a5601Cd722d8B7",
+      "hasCode": true
+    },
+    "v4PoolManager": {
+      "address": "0xbf27C8273Fd07b6A14f536cc6d32989176F57352",
+      "hasCode": true
+    },
+    "v4StateView": {
+      "address": "0x03F93fFdA821CfA7915448c30eBda20B60084049",
+      "hasCode": true
+    },
+    "v4Quoter": {
+      "address": "0xAABb24f27913DdBdb30003FcF7391C25339cfc8f",
+      "hasCode": true
+    },
+    "v4PositionDescriptor": {
+      "address": "0x628FE5b005AA96268d5CA73dF940d42edfe75E59",
+      "hasCode": true
+    },
+    "v4PositionManager": {
+      "address": "0x42Fe6cBaf11EB4d48114b0CA88a7DB2a60637C9C",
+      "hasCode": true
+    },
+    "universalRouterV4": {
+      "address": "0x38131b4E54748D376F6F588CF13F80c3d1b6A711",
+      "hasCode": true
+    },
+    "v4HookFactory": {
+      "address": "0x92951977D0a6B1E8eeB0068c74DfE87Aa680fa40",
+      "hasCode": true
+    },
+    "v4DynamicFeeHook": {
+      "address": "0xCc949F126EC57507Bdb6C8e42E565Fc13f9dC080",
+      "hasCode": true
+    }
+  },
+  "reports": {
+    "preflight": true,
+    "deployment": true,
+    "bootstrap": true,
+    "smoke": true,
+    "handoff": false,
+    "verification": false,
+    "addons": true,
+    "liquidityCleanup": true,
+    "v4Deployment": true,
+    "v4Bootstrap": true,
+    "v4Smoke": true,
+    "v4Cleanup": true
+  }
+}
+NAME                                IMAGE                                 COMMAND                  SERVICE         CREATED         STATUS
+       PORTS
+bsc-uniswap-v2-v3-dex-monitor-1     local/bsc-uniswap-v2-v3-stack:0.6.3   "/usr/bin/tini -- no…"   dex-monitor     2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:8090->8090/tcp, [::]:8090->8090/tcp
+bsc-uniswap-v2-v3-postgres-1        postgres:17-bookworm                  "docker-entrypoint.s…"   postgres        3 minutes ago   Up 3 minutes (healthy)   5432/tcp
+bsc-uniswap-v2-v3-route-api-1       local/bsc-uniswap-v2-v3-stack:0.6.3   "/usr/bin/tini -- no…"   route-api       3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:8088->8088/tcp, [::]:8088->8088/tcp
+bsc-uniswap-v2-v3-v2-v3-indexer-1   local/bsc-uniswap-v2-v3-stack:0.6.3   "/usr/bin/tini -- no…"   v2-v3-indexer   3 minutes ago   Up 3 minutes (healthy)
+
+======================================================================
+PASS: FRESH V2/V3/V4 DEPLOY -> TEST -> INDEX -> ALL CONFIGURED LIQUIDITY REMOVED
+======================================================================
+All deployer-owned V2 LP tokens were removed.
+Uniswap V2 permanently retains only its protocol minimum-liquidity dust.
+All V3 liquidity was collected and both position NFTs were burned.
+All V4 PositionManager NFT liquidity was burned, hook metadata remained indexed, and pool liquidity was indexed at zero.
+Only WBNB recovered during cleanup was unwrapped.
+PostgreSQL, indexer, route API and monitor remain running.
+cheyne@Crypto:~/bsc-uniswap-v2-v3-stack$
