@@ -1,7 +1,3 @@
-# BSC Uniswap V2/V3/V4 Stack
-
-> **v0.6.3 correction:** Explorer/BscScan source verification has been removed completely. It is not built, configured, or run. The V2/V3/V4 deployment, swaps, PositionManager LP lifecycle, dynamic-fee hook tests, mixed routing, indexing, monitoring, and liquidity cleanup remain enabled.
-
 <div align="center">
 
 # BSC UNISWAP V2 / V3 / FULL V4 STACK
