@@ -1,5 +1,3 @@
-Here’s the clean version with the maths corrected and separated properly.
-
 # Proposed Angel Investment NFT Share Structure
 
 ## Core Proposal
