@@ -14,6 +14,10 @@ The funds get divided according to the rules you chose.
 
 Simple.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/CheyneWeb3/Dev-is-Cooking-Public/refs/heads/main/PublicDocs/splitter%20image.jpg" alt="Splitter Banner" width="700">
+</p>
+
 ## One address. Multiple wallets.
 
 Imagine three people work on a project together.
