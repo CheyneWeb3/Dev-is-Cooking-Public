@@ -1,4 +1,4 @@
-# Devis Cooking
+# Dev is Cooking
 ## Weekly Engineering & Development Review
 ### 31 October – 8 November 2026
 
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-The past week has marked an important shift in the development of **Devis Cooking**.
+The past week has marked an important shift in the development of **Dev is Cooking**.
 
 Following weeks of building trading tools, wallet functionality, automated strategies and integrated Solana services, our engineering focus turned toward strengthening and consolidating the infrastructure supporting the entire platform.
 
@@ -37,13 +37,13 @@ The result is a significantly cleaner, better-isolated and more maintainable sys
 | Unified application configuration | Successfully staged and validated |
 | Source and infrastructure recovery | Protected recovery baselines established |
 
-These milestones represent substantial engineering progress while Devis Cooking remains in active beta development.
+These milestones represent substantial engineering progress while Dev is Cooking remains in active beta development.
 
 ---
 
 ## 1. Strengthening the Platform's Security Foundation
 
-One of our most important objectives this week was to establish a consistent security model across the Devis Cooking application.
+One of our most important objectives this week was to establish a consistent security model across the Dev is Cooking application.
 
 The platform now supports numerous independent processes, including automated trading, strategy scheduling, market monitoring, account operations, token services and transaction reconciliation.
 
@@ -117,13 +117,13 @@ These tests demonstrated successful transaction execution across conventional SP
 
 They also provided an opportunity to validate the interaction between transaction routing, token accounts and the platform's fee-collection system.
 
-The work strengthens Devis Cooking's ability to support the evolving Solana token ecosystem.
+The work strengthens Dev is Cooking's ability to support the evolving Solana token ecosystem.
 
 ## 4. Platform Fee Collection and Settlement
 
 Fee collection was another important area of engineering and transaction validation.
 
-Devis Cooking's trading infrastructure must support consistent platform-fee handling across different swap routes and token formats.
+Dev is Cooking's trading infrastructure must support consistent platform-fee handling across different swap routes and token formats.
 
 This week's testing covered the integration of fee collection with the updated transaction execution architecture.
 
@@ -143,7 +143,7 @@ Further acceptance testing will continue across automated strategies, recurring 
 
 ## 5. Dollar-Cost Averaging — Unified Automation Updates
 
-Another major development milestone was the continued improvement of Devis Cooking's Dollar-Cost Averaging system.
+Another major development milestone was the continued improvement of Dev is Cooking's Dollar-Cost Averaging system.
 
 DCA enables users to configure recurring trading strategies that execute according to defined schedules.
 
@@ -161,7 +161,7 @@ The architecture supports multiple scheduler instances, enabling workloads to be
 
 **Strategy execution integration**
 
-Scheduled trading uses the existing Devis Cooking execution infrastructure, helping standardize how automation jobs are processed and monitored.
+Scheduled trading uses the existing Dev is Cooking execution infrastructure, helping standardize how automation jobs are processed and monitored.
 
 **Direct Pause and Resume controls**
 
@@ -171,7 +171,7 @@ This gives users more immediate control over recurring trading activity without 
 
 **Improved management experience**
 
-The DCA interface and backend scheduling work continue to move toward a more unified automation experience across Devis Cooking.
+The DCA interface and backend scheduling work continue to move toward a more unified automation experience across Dev is Cooking.
 
 Successful DCA creation and scheduled swap activity were observed during development. Extended post-hardening transaction and fee acceptance remains part of ongoing beta testing.
 
@@ -181,7 +181,7 @@ Trading reliability extends beyond the initial transaction submission.
 
 Solana applications must coordinate transaction states, confirmations, background execution and recovery processes while avoiding unnecessary repeated processing.
 
-This week included additional verification of Devis Cooking's reconciliation services and historical execution records.
+This week included additional verification of Dev is Cooking's reconciliation services and historical execution records.
 
 We also addressed accumulated historical orders that no longer represented active trading activity.
 
@@ -251,7 +251,7 @@ Following these operations, all 16 active application containers remained health
 
 The result was approximately **4.8 GB of additional available server storage** and a substantially improved operating margin.
 
-This gives Devis Cooking more room for ongoing development, testing, backup operations and future deployments.
+This gives Dev is Cooking more room for ongoing development, testing, backup operations and future deployments.
 
 ## 9. Consolidating the Docker Application Stack
 
@@ -391,7 +391,7 @@ That infrastructure expansion remains a longer-term objective and is not part of
 
 ## Closing Review
 
-**31 October to 8 November 2026 has been a substantial engineering period for Devis Cooking.**
+**31 October to 8 November 2026 has been a substantial engineering period for Dev is Cooking.**
 
 We improved automated trading functionality, introduced a more separated Strategy Account signing architecture, verified Token-2022 trading and platform-fee collection, strengthened access controls across active services and established a consolidated infrastructure baseline.
 
@@ -399,13 +399,13 @@ At the same time, we carried out extensive server maintenance, recovered nearly 
 
 Perhaps most importantly, this week's engineering work was about making the platform **more maintainable, more secure and easier to extend without continually accumulating operational complexity**.
 
-Devis Cooking remains in active development, with additional application features and comprehensive acceptance testing still ahead.
+Dev is Cooking remains in active development, with additional application features and comprehensive acceptance testing still ahead.
 
 The foundation is now better positioned for that work.
 
 **One application ecosystem. Independently scalable services. Stronger security boundaries. A cleaner infrastructure baseline.**
 
-### Devis Cooking
+### Dev is Cooking
 *Build. Trade. Automate. Evolve.*
 
 **Weekly Development Review | 8 November 2026**
