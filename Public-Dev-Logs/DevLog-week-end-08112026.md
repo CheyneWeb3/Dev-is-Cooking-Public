@@ -1,5 +1,5 @@
 # Dev is Cooking
-## Weekly Engineering & Development Review
+## Weekly Engineering & Development Review.
 ### 31 October – 8 November 2026
 
 **From Active Development to a Secured, Scalable Pre-Production Foundation**
