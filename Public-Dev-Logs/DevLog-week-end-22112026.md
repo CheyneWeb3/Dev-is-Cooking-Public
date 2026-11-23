@@ -59,7 +59,7 @@ The result indicated no identified exposure through the inspected host Java envi
 
 These repeated reviews strengthened confidence in the current infrastructure while providing a more detailed understanding of attempted automated probing and potential exposure paths.
 
-### 2. Dust Buster Repair and Backend Compatibility
+### 2. Dust Buster update and Backend Compatibility
 
 The Dust Buster module required attention after intermittent HTTP 500 and 503 errors affected its preview functionality.
 
