@@ -1,19 +1,19 @@
-# DEVIS COOKING
+# Dev is COOKING
 ## Weekly Development & Security Report
 **Reporting period:** 8–15 November 2026  
 **Primary focus:** Security hardening, vulnerability investigations, authentication architecture and platform protection.
 
 ### Executive Summary
 
-This reporting period concentrated on strengthening Devis Cooking's security posture following heightened concerns about recently disclosed internet vulnerabilities, widespread exploitation attempts and the risk of unauthorised access to online infrastructure.
+This reporting period concentrated on strengthening Dev is Cooking's security posture following heightened concerns about recently disclosed internet vulnerabilities, widespread exploitation attempts and the risk of unauthorised access to online infrastructure.
 
-The priority was to review the existing platform, identify potential exposure points, reinforce established security protections and design an additional authentication layer for users accessing Devis Cooking.
+The priority was to review the existing platform, identify potential exposure points, reinforce established security protections and design an additional authentication layer for users accessing Dev is Cooking.
 
 Alongside these investigations, we continued validating the consolidated backend architecture, preserving production stability and checking the integrity of recovery assets.
 
 ### 1. Security Auditing and Vulnerability Hardening
 
-A series of infrastructure and application-level reviews examined the potential attack surface of the Devis Cooking platform.
+A series of infrastructure and application-level reviews examined the potential attack surface of the Dev is Cooking platform.
 
 Key work included:
 
@@ -23,7 +23,7 @@ Key work included:
 - **Application exposure:** Reviewed frontend integrations, wallet connectivity and externally supplied metadata as potential routes for unsafe browser requests.
 - **Configuration protection:** Checked the consolidation process for unintended changes to secrets, credentials, signing boundaries and active production configuration.
 
-The work was preventative, driven by concerns about internet-wide attacks rather than evidence that Devis Cooking itself had been successfully compromised.
+The work was preventative, driven by concerns about internet-wide attacks rather than evidence that Dev is Cooking itself had been successfully compromised.
 
 ### 2. External Token Metadata and Browser Security
 
@@ -85,4 +85,4 @@ The week established a stronger security baseline and a defined direction for ac
 
 Security-sensitive components were reviewed, existing custody protections were revalidated, external content risks were investigated and backup integrity was checked.
 
-The Telegram/PIN security design and consolidated deployment architecture continued progressing as part of a wider effort to make Devis Cooking safer, easier to maintain and more resilient to future security threats.
+The Telegram/PIN security design and consolidated deployment architecture continued progressing as part of a wider effort to make Dev is Cooking safer, easier to maintain and more resilient to future security threats.
