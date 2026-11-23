@@ -1,4 +1,4 @@
-# DEVIS COOKING
+# Dev is COOKING
 ## Weekly Development, Security & Platform Modernisation Report
 **Reporting period:** 16–22 November 2026  
 **Additional coverage:** Frontend and consolidation work continuing 23 November 2026  
@@ -6,11 +6,11 @@
 
 ### Executive Summary
 
-This reporting period delivered important improvements across Devis Cooking's security, infrastructure reliability, disaster recovery capabilities and user interface.
+This reporting period delivered important improvements across Dev is Cooking's security, infrastructure reliability, disaster recovery capabilities and user interface.
 
 Following the previous week's security investigations, attention shifted towards applying identified protections, independently rechecking server security, repairing legacy functionality and developing a consolidated deployment architecture.
 
-A significant milestone was the transition towards restoring and validating Devis Cooking on an entirely separate system, independent of the production server.
+A significant milestone was the transition towards restoring and validating Dev is Cooking on an entirely separate system, independent of the production server.
 
 Frontend development also progressed substantially, with improvements to navigation, strategy management views, wallet presentation and mobile usability while protecting existing trading functionality.
 
@@ -65,7 +65,7 @@ The Dust Buster module required attention after intermittent HTTP 500 and 503 er
 
 The investigation established that the module had been developed before several major backend changes, including the isolated vault signer, RPC failover improvements and worker updates.
 
-The repair focused on compatibility with the **current live Devis Cooking architecture**, rather than replacing the working backend with an older consolidated candidate.
+The repair focused on compatibility with the **current live Dev is Cooking architecture**, rather than replacing the working backend with an older consolidated candidate.
 
 Work included:
 
@@ -83,7 +83,7 @@ The work preserved the existing security architecture and free/public RPC policy
 
 ### 3. Infrastructure Consolidation and Deployment Management
 
-Development progressed towards consolidating Devis Cooking's separate Docker services, configuration files and deployment dependencies into a more manageable, repeatable platform architecture.
+Development progressed towards consolidating Dev is Cooking's separate Docker services, configuration files and deployment dependencies into a more manageable, repeatable platform architecture.
 
 The work encompassed the trading backend, main Cooking services, payment infrastructure and website components.
 
@@ -104,7 +104,7 @@ The objective of consolidation is to reduce deployment complexity, improve recov
 
 ### 4. Independent Backup, Restore and Disaster Recovery
 
-One of the week's most significant achievements was establishing a recovery workflow capable of reconstructing Devis Cooking on a completely separate system.
+One of the week's most significant achievements was establishing a recovery workflow capable of reconstructing Dev is Cooking on a completely separate system.
 
 Rather than relying solely on backups stored on the production Linode server, we transitioned into a dedicated **Cooking-Test environment running under Windows WSL with Docker**.
 
@@ -131,7 +131,7 @@ The Cooking-Test environment successfully restored and validated:
 
 Application-level validation also began, including website startup checks, API dependency inspection and testing of isolated runtime configuration.
 
-This established a practical foundation for recovering Devis Cooking without depending on the original production host.
+This established a practical foundation for recovering Dev is Cooking without depending on the original production host.
 
 **Status:** Independent restore verification achieved for core database and image recovery; full application startup, environment alignment and recovery acceptance testing progressing.
 
@@ -176,7 +176,7 @@ A critical requirement was that the **existing individual Strategy Details and C
 
 **Design consistency**
 
-The modernisation retained the established Devis Cooking branding, using dark backgrounds and purple, violet, magenta and amber accents.
+The modernisation retained the established Dev is Cooking branding, using dark backgrounds and purple, violet, magenta and amber accents.
 
 The intended result is a cleaner, more consistent and more accessible interface without requiring users to relearn existing trading controls.
 
@@ -202,10 +202,10 @@ Continued work is focused on production build validation, authenticated interfac
 
 ### Weekly Outcome
 
-The week demonstrated measurable progress in Devis Cooking's security, reliability, recoverability and frontend usability.
+The week demonstrated measurable progress in Dev is Cooking's security, reliability, recoverability and frontend usability.
 
 The most important achievements were the NGINX security upgrade and subsequent rechecks, the initial Dust Buster repair, successful independent restoration of core database systems, verification of 21 recovery images, and substantial frontend improvements.
 
-The continuing consolidation and recovery programme is positioning Devis Cooking for more reliable deployment, safer maintenance and improved disaster recovery.
+The continuing consolidation and recovery programme is positioning Dev is Cooking for more reliable deployment, safer maintenance and improved disaster recovery.
 
 Together, these developments move the platform towards a more secure, maintainable and user-friendly production environment while retaining the integrity of its existing trading and vault systems.
