@@ -63,14 +63,14 @@ These repeated reviews strengthened confidence in the current infrastructure whi
 
 The Dust Buster module required attention after intermittent HTTP 500 and 503 errors affected its preview functionality.
 
-The investigation established that the module had been developed before several major backend changes, including the isolated custody signer, RPC failover improvements and worker updates.
+The investigation established that the module had been developed before several major backend changes, including the isolated vault signer, RPC failover improvements and worker updates.
 
 The repair focused on compatibility with the **current live Devis Cooking architecture**, rather than replacing the working backend with an older consolidated candidate.
 
 Work included:
 
 - Reviewing legacy Solana RPC usage and integrating the existing public RPC pool/failover approach.
-- Validating interactions with the R4 isolated custody signer.
+- Validating interactions with the R4 isolated vault signer.
 - Preserving Jupiter integration, fee handling and existing transaction execution boundaries.
 - Deploying the updated Dust Buster API image independently of the signer and worker services.
 - Testing connected-wallet and Strategy Vault functionality.
@@ -174,12 +174,6 @@ The Strategies overview was developed to support a more flexible listing experie
 
 A critical requirement was that the **existing individual Strategy Details and Controls page remain unchanged**, preserving its current actions, management behaviour and trading functionality.
 
-**Wallet presentation and usability**
-
-User-facing wallet terminology was refined, including the introduction of **Strategy Vault** naming for the platform-managed strategy wallet and clearer Connect Wallet presentation for external wallet connections.
-
-Supporting work also addressed wallet popup layouts, Profile presentation, Advanced Mode visibility and mobile-friendly interactions.
-
 **Design consistency**
 
 The modernisation retained the established Devis Cooking branding, using dark backgrounds and purple, violet, magenta and amber accents.
@@ -214,4 +208,4 @@ The most important achievements were the NGINX security upgrade and subsequent r
 
 The continuing consolidation and recovery programme is positioning Devis Cooking for more reliable deployment, safer maintenance and improved disaster recovery.
 
-Together, these developments move the platform towards a more secure, maintainable and user-friendly production environment while retaining the integrity of its existing trading and custody systems.
+Together, these developments move the platform towards a more secure, maintainable and user-friendly production environment while retaining the integrity of its existing trading and vault systems.
