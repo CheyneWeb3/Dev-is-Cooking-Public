@@ -1,4 +1,4 @@
-# Devis Cooking — Frontend Development Report
+# Dev is Cooking — Frontend Development Report
 
 **Date:** 22 November 2026  
 **Development Releases:** R1–R20  
@@ -7,7 +7,7 @@
 
 ## 1. Overview
 
-The Devis Cooking frontend has undergone a series of targeted improvements to simplify navigation, improve usability, reduce interface clutter, enhance market information and correct display and charting issues.
+The Dev is Cooking frontend has undergone a series of targeted improvements to simplify navigation, improve usability, reduce interface clutter, enhance market information and correct display and charting issues.
 
 Development has been based on the existing live frontend source, preserving the application's architecture and working functionality.
 
@@ -294,7 +294,7 @@ No backend, trading-worker, custody-signer or RPC configuration changes were per
 **Backend Modifications:** None performed  
 **Strategy Controls and Details Page:** Unchanged  
 
-The Devis Cooking frontend has received substantial user-facing improvements across navigation, strategy discovery, Markets, Activity, Assets, Profile preferences and GeckoTerminal charting.
+The Dev is Cooking frontend has received substantial user-facing improvements across navigation, strategy discovery, Markets, Activity, Assets, Profile preferences and GeckoTerminal charting.
 
 The changes provide a cleaner interface, more direct navigation, improved token identification, compact activity monitoring and more reliable chart presentation.
 
