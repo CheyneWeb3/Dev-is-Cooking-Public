@@ -1,7 +1,7 @@
-# Devis Cooking — Weekly Development Update  
+# Dev is Cooking — Weekly Development Update  
 ## From Trading Rules to Live On-Chain Automation
 
-This week was a major development milestone for **Devis Cooking**.
+This week was a major development milestone for **Dev is Cooking**.
 
 A large part of the work focused on taking the Cooking strategy system beyond creating and displaying trading rules and turning it into a genuine automated execution engine capable of detecting market conditions, preparing trades, signing them with a strategy wallet, submitting them through Jupiter and Solana, and tracking them through completion.
 
@@ -172,7 +172,7 @@ This provides a much better operational view of the automation engine than manua
 
 Reliable blockchain infrastructure became another major area of work this week.
 
-Devis Cooking already supports multiple Solana RPC endpoints, but live testing exposed a problem where one RPC provider had reached its usage limits.
+Dev is Cooking already supports multiple Solana RPC endpoints, but live testing exposed a problem where one RPC provider had reached its usage limits.
 
 The affected provider began returning HTTP 429 rate-limit responses.
 
